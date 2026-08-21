@@ -688,7 +688,7 @@ function Index() {
           <div>
             <div className="flex items-center gap-2">
               <span className="grid size-9 place-items-center rounded-full bg-primary text-primary-foreground">
-                <Sparkles className="size-4" />
+                <Check className="size-4" />
               </span>
               <span className="font-display text-lg font-bold">Duda &amp; Bia Festas</span>
             </div>
