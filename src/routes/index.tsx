@@ -118,7 +118,7 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <div className="sr-only">retire todos emojis e estrelas do site</div>
+      <div className="sr-only">coloque uma cor na seção de baixo do site, onde fica a navegação, inicio, sobre etc</div>
       {/* Header */}
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
