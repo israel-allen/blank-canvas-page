@@ -3,6 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { MessageCircle, Star, Calendar, MapPin, Sparkles, ChefHat } from "lucide-react";
+import heroFesta from "@/assets/hero-festa.jpg";
+import galeria1 from "@/assets/galeria-1.jpg";
+import galeria2 from "@/assets/galeria-2.jpg";
+import galeria3 from "@/assets/galeria-3.jpg";
+
+const galeria = [galeria1, galeria2, galeria3, heroFesta, galeria3, galeria1, galeria2, heroFesta];
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -20,13 +26,15 @@ function Index() {
   const whatsappLink = "https://wa.me/5521999999999"; // Placeholder, update to actual
 
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-white">melhore esse layout copiando o site www.vivianfestabaloes.com
+    <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-white">
       {/* Hero Section */}
       <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://images.unsplash.com/photo-1519225421980-715cb0354aed?q=80&w=2070&auto=format&fit=crop" 
-            alt="Festa elegante" 
+            src={heroFesta}
+            width={1920}
+            height={1080}
+            alt="Salão de festa elegante decorado com balões cor-de-rosa e dourados em Maricá" 
             className="w-full h-full object-cover brightness-50"
           />
         </div>
@@ -118,7 +126,7 @@ function Index() {
           <p className="text-lg text-muted-foreground">Confira alguns dos eventos realizados pela Duda e Bia. Qualidade e capricho em cada detalhe.</p>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+          {galeria.map((src, i) => (
             <motion.div 
               key={i} 
               initial={{ opacity: 0, scale: 0.9 }} 
@@ -128,8 +136,11 @@ function Index() {
               className="aspect-square rounded-[2rem] overflow-hidden bg-muted group cursor-pointer shadow-md"
             >
               <img 
-                src={`https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=2070&auto=format&fit=crop&crop=focalpoint&fp-y=${0.1 * i}`} 
-                alt="Evento" 
+                src={src}
+                loading="lazy"
+                width={1024}
+                height={1024}
+                alt="Festa e decoração realizada pela Duda e Bia Festas Maricá" 
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
             </motion.div>
@@ -198,7 +209,7 @@ function Index() {
             viewport={{ once: true }}
             className="rounded-[3rem] overflow-hidden shadow-2xl relative"
           >
-            <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?q=80&w=2069&auto=format&fit=crop" alt="Evento Produzido" className="w-full h-full object-cover aspect-[4/5]" />
+            <img src={galeria1} loading="lazy" width={1024} height={1024} alt="Decoração de festa produzida pela Duda e Bia" className="w-full h-full object-cover aspect-[4/5]" />
           </motion.div>
         </div>
       </section>
