@@ -3,6 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { MessageCircle, Star, Calendar, MapPin, Sparkles, ChefHat } from "lucide-react";
+import heroFesta from "@/assets/hero-festa.jpg";
+import galeria1 from "@/assets/galeria-1.jpg";
+import galeria2 from "@/assets/galeria-2.jpg";
+import galeria3 from "@/assets/galeria-3.jpg";
+
+const galeria = [galeria1, galeria2, galeria3, heroFesta, galeria3, galeria1, galeria2, heroFesta];
 
 export const Route = createFileRoute("/")({
   component: Index,
