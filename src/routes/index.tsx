@@ -126,7 +126,7 @@ function Index() {
           <p className="text-lg text-muted-foreground">Confira alguns dos eventos realizados pela Duda e Bia. Qualidade e capricho em cada detalhe.</p>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+          {galeria.map((src, i) => (
             <motion.div 
               key={i} 
               initial={{ opacity: 0, scale: 0.9 }} 
@@ -136,8 +136,11 @@ function Index() {
               className="aspect-square rounded-[2rem] overflow-hidden bg-muted group cursor-pointer shadow-md"
             >
               <img 
-                src={`https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=2070&auto=format&fit=crop&crop=focalpoint&fp-y=${0.1 * i}`} 
-                alt="Evento" 
+                src={src}
+                loading="lazy"
+                width={1024}
+                height={1024}
+                alt="Festa e decoração realizada pela Duda e Bia Festas Maricá" 
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
             </motion.div>
