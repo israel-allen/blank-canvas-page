@@ -1,0 +1,8 @@
+{
+  "appId": "app.lovable.194fdbc5aef245ca9d97af8713eda1be",
+  "appName": "Lovable App",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  }
+}
