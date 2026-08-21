@@ -20,7 +20,7 @@ import galeria2 from "../assets/galeria-2.jpg";
 import galeria3 from "../assets/galeria-3.jpg";
 
 // Substitua pelo número oficial de WhatsApp da Duda & Bia (formato 55DDDNÚMERO).
-const WHATSAPP = "5521970000000";
+const WHATSAPP = "5521988522664";
 const INSTAGRAM = "https://www.instagram.com/dudaebiafestasmarica/";
 
 const waLink = (msg: string) =>
@@ -691,7 +691,7 @@ function Index() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 transition-colors hover:text-primary"
                 >
-                  <WhatsAppIcon className="size-4 text-primary" /> Falar no WhatsApp
+                  <WhatsAppIcon className="size-4 text-primary" /> 21 98852-2664
                 </a>
               </li>
               <li>
@@ -719,7 +719,7 @@ function Index() {
         href={waLink("Olá, Duda & Bia! Gostaria de um orçamento.")}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Falar no WhatsApp"
+        aria-label="21 988522664"
         className="fixed right-5 bottom-5 z-50 grid size-14 place-items-center rounded-full bg-[#25D366] text-white shadow-2xl transition-transform hover:scale-110"
       >
         <WhatsAppIcon className="size-7" />
