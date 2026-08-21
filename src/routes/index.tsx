@@ -602,40 +602,6 @@ function Index() {
         </div>
       </section>
 
-      {/* Depoimentos */}
-      <section className="bg-secondary/60 py-20 md:py-28">
-        <div className="mx-auto max-w-6xl px-5">
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">
-              Depoimentos
-            </p>
-            <h2 className="mt-4 text-3xl font-bold text-balance-pretty sm:text-4xl">
-              O que dizem nossos clientes
-            </h2>
-            <p className="mt-4 text-sm text-muted-foreground">
-              Envie o seu depoimento e ele aparecerá aqui.
-            </p>
-          </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="flex min-h-45 flex-col justify-between rounded-3xl border border-dashed border-primary/30 bg-card/60 p-7"
-              >
-                <Quote className="size-6 text-primary/40" />
-                <p className="mt-4 text-sm text-muted-foreground">
-                  Espaço reservado para o depoimento de um cliente da Duda &amp; Bia.
-                </p>
-                <div className="mt-6 flex gap-1 text-gold">
-                  {Array.from({ length: 5 }).map((_, k) => (
-                    <div key={k} className="size-4 bg-gold rounded-full opacity-20" />
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Instagram + CTA final */}
       <section id="contato" className="relative overflow-hidden py-20 md:py-28">
