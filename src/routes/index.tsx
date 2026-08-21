@@ -556,10 +556,10 @@ function Index() {
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
             {[
               { icon: Heart, t: "Atendimento personalizado", d: "Conversamos de perto para entender o seu sonho." },
-              { icon: Sparkles, t: "Criatividade", d: "Decoração pensada para o seu tema e estilo." },
-              { icon: PartyPopper, t: "Praticidade", d: "Você escolhe, nós montamos e organizamos tudo." },
+              { icon: Check, t: "Criatividade", d: "Decoração pensada para o seu tema e estilo." },
+              { icon: Check, t: "Praticidade", d: "Você escolhe, nós montamos e organizamos tudo." },
               { icon: Check, t: "Organização", d: "Prazos cumpridos e evento fluindo do jeito certo." },
-              { icon: Star, t: "Cuidado nos detalhes", d: "Capricho em cada mesa, arranjo e acabamento." },
+              { icon: Check, t: "Cuidado nos detalhes", d: "Capricho em cada mesa, arranjo e acabamento." },
             ].map((f) => (
               <div
                 key={f.t}
