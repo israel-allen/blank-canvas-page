@@ -121,7 +121,7 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <div className="sr-only">recrie a logo para uma logo estilizada com as letras D&amp;B</div>
+      <div className="sr-only">https://www.instagram.com/p/DYFqB-fkfLT/?img_index=1 observe essa foto e troque a estrela do logo por algo parecido com a foto</div>
       {/* Header */}
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
