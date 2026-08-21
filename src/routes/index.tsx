@@ -230,7 +230,7 @@ function Index() {
           </Reveal>
           <Reveal delay={240}>
             <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-primary-foreground/90 text-balance-pretty sm:text-lg">
-              Levamos buffet, decoration e toda a festa até o seu espaço. Ou escolha a festa com
+              Levamos buffet, decoração e toda a festa até o seu espaço. Ou escolha a festa com
               local: realizaremos seu sonho por completo.
             </p>
           </Reveal>
