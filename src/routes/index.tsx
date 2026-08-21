@@ -266,7 +266,7 @@ function Index() {
               width={1024}
               height={1024}
               loading="lazy"
-              className="aspect-4/5 w-full rounded-[2rem] object-cover shadow-2xl shadow-primary/15"
+              className="w-full h-auto rounded-[2rem] shadow-2xl shadow-primary/15"
             />
             <div className="absolute -bottom-6 -right-4 hidden rounded-2xl bg-card px-6 py-5 shadow-xl sm:block">
               <p className="font-display text-2xl font-bold text-primary">Do seu jeito</p>
@@ -341,14 +341,14 @@ function Index() {
                 key={card.title}
                 className="group overflow-hidden rounded-[2rem] bg-card shadow-lg shadow-primary/10 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-primary/20"
               >
-                <div className="relative h-60 overflow-hidden">
+                <div className="relative overflow-hidden">
                   <img
                     src={card.img}
                     alt={card.title}
                     width={1024}
                     height={1024}
                     loading="lazy"
-                    className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-auto transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
                 <div className="p-7">
@@ -430,14 +430,14 @@ function Index() {
               key={s.title}
               className="group overflow-hidden rounded-3xl bg-card shadow-md shadow-primary/8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-primary/20"
             >
-              <div className="relative h-44 overflow-hidden">
+              <div className="relative overflow-hidden">
                 <img
                   src={s.img}
                   alt={s.title}
                   width={1024}
                   height={1024}
                   loading="lazy"
-                  className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-auto transition-transform duration-700 group-hover:scale-105"
                 />
                 <span className="absolute bottom-3 left-3 grid size-10 place-items-center rounded-full bg-card text-primary shadow-lg">
                   <s.icon className="size-5" />
@@ -539,7 +539,7 @@ function Index() {
               width={1024}
               height={1024}
               loading="lazy"
-              className="aspect-square w-full rounded-[2rem] object-cover shadow-2xl shadow-primary/15"
+              className="w-full h-auto rounded-[2rem] shadow-2xl shadow-primary/15"
             />
           </div>
         </div>
