@@ -26,13 +26,15 @@ function Index() {
   const whatsappLink = "https://wa.me/5521999999999"; // Placeholder, update to actual
 
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-white">melhore esse layout copiando o site www.vivianfestabaloes.com
+    <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-white">
       {/* Hero Section */}
       <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://images.unsplash.com/photo-1519225421980-715cb0354aed?q=80&w=2070&auto=format&fit=crop" 
-            alt="Festa elegante" 
+            src={heroFesta}
+            width={1920}
+            height={1080}
+            alt="Salão de festa elegante decorado com balões cor-de-rosa e dourados em Maricá" 
             className="w-full h-full object-cover brightness-50"
           />
         </div>
