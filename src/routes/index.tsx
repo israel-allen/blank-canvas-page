@@ -390,7 +390,7 @@ function Index() {
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {[
             {
-              icon: Sparkles,
+              icon: Check,
               img: decoracao,
               title: "Decoração de festas",
               text: "Painéis, balões, mesas temáticas e ambientação sob medida para o seu tema.",
@@ -402,7 +402,7 @@ function Index() {
               text: "Salgados, doces, bebidas e mesa montada com apresentação caprichada.",
             },
             {
-              icon: PartyPopper,
+              icon: Check,
               img: heroFesta,
               title: "Festas completas",
               text: "Da proposta à montagem: cuidamos de toda a produção do seu evento.",
@@ -420,7 +420,7 @@ function Index() {
               text: "Solução completa com local incluso, pronta para receber seus convidados.",
             },
             {
-              icon: Star,
+              icon: Check,
               img: galeria2,
               title: "Eventos personalizados",
               text: "Aniversários, chás, batizados e comemorações do jeitinho que você imaginou.",
