@@ -220,7 +220,7 @@ function Index() {
         <div className="relative mx-auto flex min-h-[92vh] max-w-4xl flex-col items-center justify-center px-5 pt-28 pb-20 text-center">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-gold-soft/50 bg-background/15 px-4 py-1.5 text-xs font-semibold tracking-[0.2em] text-primary-foreground uppercase backdrop-blur">
-              <Star className="size-3.5 text-gold" /> Festas • Buffet • Decoração
+              Festas • Buffet • Decoração
             </span>
           </Reveal>
           <Reveal delay={120}>
@@ -230,7 +230,7 @@ function Index() {
           </Reveal>
           <Reveal delay={240}>
             <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-primary-foreground/90 text-balance-pretty sm:text-lg">
-              Levamos buffet, decoração e toda a festa até o seu espaço 🎉 Ou escolha a festa com
+              Levamos buffet, decoration e toda a festa até o seu espaço. Ou escolha a festa com
               local: realizaremos seu sonho por completo.
             </p>
           </Reveal>
