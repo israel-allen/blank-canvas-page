@@ -1,6 +1,6 @@
 {
-  "appId": "app.lovable.194fdbc5aef245ca9d97af8713eda1be",
-  "appName": "Lovable App",
+  "appId": "com.dudaebiafestas.marica",
+  "appName": "Duda e Bia Festas",
   "webDir": "dist",
   "server": {
     "androidScheme": "https"
