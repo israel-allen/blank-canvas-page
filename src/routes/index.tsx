@@ -35,11 +35,11 @@ function Index() {
 
 3. Meta tags mobile no index.html ou __root.tsx: meta theme-color, meta apple-mobile-web-app-capable "yes", meta apple-mobile-web-app-status-bar-style "black-translucent", meta mobile-web-app-capable "yes", link rel manifest href "/manifest.webmanifest", viewport com width=device-width initial-scale=1 viewport-fit=cover
 
-4. Registrar o SW no entry point principal: if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js')})}
+4. Registrar o SW no entry point principal: if('serviceWorker' in navigator){"{"}window.addEventListener('load',()=&gt;{"{"}navigator.serviceWorker.register('/sw.js'){"}"}){"}"}
 
 5. capacitor.config.json na raiz do projeto com: appId baseado no domínio do projeto, appName com nome do projeto, webDir "dist", server.androidScheme "https"
 
-6. Ajustes CSS mobile: html{-webkit-tap-highlight-color:transparent} body{overscroll-behavior:none} garantir inputs com font-size >= 16px
+6. Ajustes CSS mobile: html{"{"}-webkit-tap-highlight-color:transparent{"}"} body{"{"}overscroll-behavior:none{"}"} garantir inputs com font-size &gt;= 16px
 
 NÃO mude lógica de negócio, rotas ou funcionalidades. Apenas adicione o necessário pra PWA/mobile.
       {/* Hero Section */}
