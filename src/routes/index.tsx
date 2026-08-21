@@ -20,7 +20,7 @@ function Index() {
   const whatsappLink = "https://wa.me/5521999999999"; // Placeholder, update to actual
 
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-white">corrigir erro
+    <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-white">melhore esse layout copiando o site www.vivianfestabaloes.com
       {/* Hero Section */}
       <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
