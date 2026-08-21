@@ -2,15 +2,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
   Cake,
-  Sparkles,
-  PartyPopper,
   Heart,
   MapPin,
   Menu,
   X,
   Check,
   Quote,
-  Star,
 } from "lucide-react";
 
 import heroFesta from "../assets/hero-festa.jpg";
@@ -121,7 +118,7 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <div className="sr-only">https://www.instagram.com/p/DYFqB-fkfLT/?img_index=1 observe essa foto e troque a estrela do logo por algo parecido com a foto</div>
+      <div className="sr-only">retire todos emojis e estrelas do site</div>
       {/* Header */}
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
@@ -134,20 +131,6 @@ function Index() {
           <a href="#inicio" className="flex items-center gap-3">
             <span className="relative flex size-11 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/25">
               <span className="font-display text-xl font-bold tracking-tighter">D&amp;B</span>
-              <div className="absolute -top-1.5 -right-1.5 animate-pulse text-gold">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="size-4"
-                >
-                  <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" />
-                  <circle cx="12" cy="12" r="3" fill="currentColor" stroke="none" />
-                </svg>
-              </div>
             </span>
             <div className="flex flex-col">
               <span
@@ -237,7 +220,7 @@ function Index() {
         <div className="relative mx-auto flex min-h-[92vh] max-w-4xl flex-col items-center justify-center px-5 pt-28 pb-20 text-center">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-gold-soft/50 bg-background/15 px-4 py-1.5 text-xs font-semibold tracking-[0.2em] text-primary-foreground uppercase backdrop-blur">
-              <Star className="size-3.5 text-gold" /> Festas • Buffet • Decoração
+              Festas • Buffet • Decoração
             </span>
           </Reveal>
           <Reveal delay={120}>
@@ -247,7 +230,7 @@ function Index() {
           </Reveal>
           <Reveal delay={240}>
             <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-primary-foreground/90 text-balance-pretty sm:text-lg">
-              Levamos buffet, decoração e toda a festa até o seu espaço 🎉 Ou escolha a festa com
+              Levamos buffet, decoração e toda a festa até o seu espaço. Ou escolha a festa com
               local: realizaremos seu sonho por completo.
             </p>
           </Reveal>
@@ -407,7 +390,7 @@ function Index() {
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {[
             {
-              icon: Sparkles,
+              icon: Check,
               img: decoracao,
               title: "Decoração de festas",
               text: "Painéis, balões, mesas temáticas e ambientação sob medida para o seu tema.",
@@ -419,7 +402,7 @@ function Index() {
               text: "Salgados, doces, bebidas e mesa montada com apresentação caprichada.",
             },
             {
-              icon: PartyPopper,
+              icon: Check,
               img: heroFesta,
               title: "Festas completas",
               text: "Da proposta à montagem: cuidamos de toda a produção do seu evento.",
@@ -437,7 +420,7 @@ function Index() {
               text: "Solução completa com local incluso, pronta para receber seus convidados.",
             },
             {
-              icon: Star,
+              icon: Check,
               img: galeria2,
               title: "Eventos personalizados",
               text: "Aniversários, chás, batizados e comemorações do jeitinho que você imaginou.",
@@ -573,10 +556,10 @@ function Index() {
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
             {[
               { icon: Heart, t: "Atendimento personalizado", d: "Conversamos de perto para entender o seu sonho." },
-              { icon: Sparkles, t: "Criatividade", d: "Decoração pensada para o seu tema e estilo." },
-              { icon: PartyPopper, t: "Praticidade", d: "Você escolhe, nós montamos e organizamos tudo." },
+              { icon: Check, t: "Criatividade", d: "Decoração pensada para o seu tema e estilo." },
+              { icon: Check, t: "Praticidade", d: "Você escolhe, nós montamos e organizamos tudo." },
               { icon: Check, t: "Organização", d: "Prazos cumpridos e evento fluindo do jeito certo." },
-              { icon: Star, t: "Cuidado nos detalhes", d: "Capricho em cada mesa, arranjo e acabamento." },
+              { icon: Check, t: "Cuidado nos detalhes", d: "Capricho em cada mesa, arranjo e acabamento." },
             ].map((f) => (
               <div
                 key={f.t}
@@ -645,7 +628,7 @@ function Index() {
                 </p>
                 <div className="mt-6 flex gap-1 text-gold">
                   {Array.from({ length: 5 }).map((_, k) => (
-                    <Star key={k} className="size-4 fill-current" />
+                    <div key={k} className="size-4 bg-gold rounded-full opacity-20" />
                   ))}
                 </div>
               </div>
@@ -705,7 +688,7 @@ function Index() {
           <div>
             <div className="flex items-center gap-2">
               <span className="grid size-9 place-items-center rounded-full bg-primary text-primary-foreground">
-                <Sparkles className="size-4" />
+                <Check className="size-4" />
               </span>
               <span className="font-display text-lg font-bold">Duda &amp; Bia Festas</span>
             </div>
