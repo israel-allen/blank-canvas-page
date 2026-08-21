@@ -628,7 +628,7 @@ function Index() {
                 </p>
                 <div className="mt-6 flex gap-1 text-gold">
                   {Array.from({ length: 5 }).map((_, k) => (
-                    <Star key={k} className="size-4 fill-current" />
+                    <div key={k} className="size-4 bg-gold rounded-full opacity-20" />
                   ))}
                 </div>
               </div>
