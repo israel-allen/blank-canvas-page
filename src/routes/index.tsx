@@ -2,15 +2,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
   Cake,
-  Sparkles,
-  PartyPopper,
   Heart,
   MapPin,
   Menu,
   X,
   Check,
   Quote,
-  Star,
 } from "lucide-react";
 
 import heroFesta from "../assets/hero-festa.jpg";
