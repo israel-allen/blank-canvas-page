@@ -7,7 +7,7 @@ import {
   Menu,
   X,
   Check,
-  Quote,
+  
 } from "lucide-react";
 
 import heroFesta from "../assets/hero-festa.jpg";
