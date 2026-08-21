@@ -121,6 +121,7 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <div className="sr-only">recrie a logo para uma logo estilizada com as letras D&amp;B</div>
       {/* Header */}
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
@@ -130,20 +131,23 @@ function Index() {
         }`}
       >
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-          <a href="#inicio" className="flex items-center gap-2">
-            <span className="grid size-9 place-items-center rounded-full bg-primary text-primary-foreground">
-              <Sparkles className="size-4" />
+          <a href="#inicio" className="flex items-center gap-3">
+            <span className="relative flex size-11 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/25">
+              <span className="font-display text-xl font-bold tracking-tighter">D&amp;B</span>
+              <Sparkles className="absolute -top-1.5 -right-1.5 size-4 text-gold animate-pulse" />
             </span>
-            <span
-              className={`font-display text-lg leading-tight font-bold ${
-                scrolled ? "text-foreground" : "text-primary-foreground drop-shadow"
-              }`}
-            >
-              Duda &amp; Bia
-              <span className="block text-[10px] font-sans font-medium tracking-[0.25em] uppercase opacity-80">
+            <div className="flex flex-col">
+              <span
+                className={`font-display text-lg leading-none font-bold tracking-tight ${
+                  scrolled ? "text-foreground" : "text-primary-foreground drop-shadow"
+                }`}
+              >
+                Duda &amp; Bia
+              </span>
+              <span className="mt-1 text-[9px] font-sans font-bold tracking-[0.3em] uppercase opacity-80 mix-blend-overlay">
                 Festas Maricá
               </span>
-            </span>
+            </div>
           </a>
 
           <nav className="hidden items-center gap-7 md:flex">
