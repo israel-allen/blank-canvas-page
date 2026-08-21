@@ -134,7 +134,20 @@ function Index() {
           <a href="#inicio" className="flex items-center gap-3">
             <span className="relative flex size-11 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/25">
               <span className="font-display text-xl font-bold tracking-tighter">D&amp;B</span>
-              <Sparkles className="absolute -top-1.5 -right-1.5 size-4 text-gold animate-pulse" />
+              <div className="absolute -top-1.5 -right-1.5 animate-pulse text-gold">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="size-4"
+                >
+                  <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" />
+                  <circle cx="12" cy="12" r="3" fill="currentColor" stroke="none" />
+                </svg>
+              </div>
             </span>
             <div className="flex flex-col">
               <span
