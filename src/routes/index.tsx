@@ -209,7 +209,7 @@ function Index() {
             viewport={{ once: true }}
             className="rounded-[3rem] overflow-hidden shadow-2xl relative"
           >
-            <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?q=80&w=2069&auto=format&fit=crop" alt="Evento Produzido" className="w-full h-full object-cover aspect-[4/5]" />
+            <img src={galeria1} loading="lazy" width={1024} height={1024} alt="Decoração de festa produzida pela Duda e Bia" className="w-full h-full object-cover aspect-[4/5]" />
           </motion.div>
         </div>
       </section>
