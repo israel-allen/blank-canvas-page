@@ -1,291 +1,762 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { motion } from "framer-motion";
-import { MessageCircle, Star, Calendar, MapPin, Sparkles, ChefHat } from "lucide-react";
-import heroFesta from "@/assets/hero-festa.jpg";
-import galeria1 from "@/assets/galeria-1.jpg";
-import galeria2 from "@/assets/galeria-2.jpg";
-import galeria3 from "@/assets/galeria-3.jpg";
+import { useEffect, useState } from "react";
+import {
+  Cake,
+  Sparkles,
+  PartyPopper,
+  Heart,
+  MapPin,
+  Menu,
+  X,
+  Check,
+  Quote,
+  Star,
+} from "lucide-react";
 
-const galeria = [galeria1, galeria2, galeria3, heroFesta, galeria3, galeria1, galeria2, heroFesta];
+import heroFesta from "../assets/hero-festa.jpg";
+import decoracao from "../assets/decoracao.jpg";
+import buffetImg from "../assets/buffet.jpg";
+import festaLocal from "../assets/festa-local.jpg";
+import festaCliente from "../assets/festa-cliente.jpg";
+import galeria1 from "../assets/galeria-1.jpg";
+import galeria2 from "../assets/galeria-2.jpg";
+import galeria3 from "../assets/galeria-3.jpg";
+
+// Substitua pelo número oficial de WhatsApp da Duda & Bia (formato 55DDDNÚMERO).
+const WHATSAPP = "5521970000000";
+const INSTAGRAM = "https://www.instagram.com/dudaebiafestasmarica/";
+
+const waLink = (msg: string) =>
+  `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
+
+const NAV = [
+  { label: "Início", href: "#inicio" },
+  { label: "Sobre", href: "#sobre" },
+  { label: "Serviços", href: "#servicos" },
+  { label: "Galeria", href: "#galeria" },
+  { label: "Festa com Local", href: "#festa-com-local" },
+  { label: "Contato", href: "#contato" },
+];
 
 export const Route = createFileRoute("/")({
-  component: Index,
   head: () => ({
     meta: [
-      { title: "Duda e Bia Festas Maricá | Buffet, Decoração e Eventos Completos" },
-      { name: "description", content: "Duda e Bia Festas Maricá oferece buffet, decoração e estrutura completa para realizar seu sonho de festa. Buffet, decoração de festas em Maricá." },
-      { property: "og:title", content: "Duda e Bia Festas Maricá | Buffet e Decoração" },
-      { property: "og:description", content: "Transformamos seu sonho de festa em realidade. Buffet, decoração e estrutura completa para eventos em Maricá." },
+      {
+        title: "Duda & Bia Festas Maricá | Buffet e Decoração de Festas",
+      },
+      {
+        name: "description",
+        content:
+          "Buffet em Maricá, decoração de festas e festa completa com local. A Duda & Bia leva toda a estrutura da festa até o seu espaço. Peça seu orçamento pelo WhatsApp.",
+      },
+      {
+        property: "og:title",
+        content: "Duda & Bia Festas Maricá | Buffet e Decoração",
+      },
+      {
+        property: "og:description",
+        content:
+          "Festas completas em Maricá: buffet, decoração e organização no seu espaço ou com local incluso.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
+  component: Index,
 });
 
+function Instagram({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <rect x="2" y="2" width="20" height="20" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function WhatsAppIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.45 1.34 4.95L2 22l5.23-1.37a9.9 9.9 0 0 0 4.81 1.23h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2Zm0 18.03h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.1.81.83-3.02-.2-.31a8.19 8.19 0 0 1-1.26-4.37c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.21-8.25 8.21Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.71-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.41.09-.17.04-.31-.02-.44-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.42l-.47-.01c-.17 0-.44.06-.66.31-.23.24-.87.85-.87 2.07s.89 2.4 1.02 2.56c.12.17 1.75 2.67 4.24 3.75.59.25 1.05.4 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.16-.48-.28Z" />
+    </svg>
+  );
+}
+
+function Reveal({
+  children,
+  delay = 0,
+  className = "",
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}) {
+  return (
+    <div className={`animate-rise ${className}`} style={{ animationDelay: `${delay}ms` }}>
+      {children}
+    </div>
+  );
+}
+
 function Index() {
-  const whatsappLink = "https://wa.me/5521999999999"; // Placeholder, update to actual
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-white">
-      Preciso que você transforme este projeto em um Progressive Web App (PWA) completo e pronto para ser empacotado como aplicativo mobile nativo. Faça TODAS as alterações abaixo de uma vez:
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Header */}
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? "bg-background/90 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.15)] backdrop-blur-md"
+            : "bg-transparent"
+        }`}
+      >
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+          <a href="#inicio" className="flex items-center gap-2">
+            <span className="grid size-9 place-items-center rounded-full bg-primary text-primary-foreground">
+              <Sparkles className="size-4" />
+            </span>
+            <span
+              className={`font-display text-lg leading-tight font-bold ${
+                scrolled ? "text-foreground" : "text-primary-foreground drop-shadow"
+              }`}
+            >
+              Duda &amp; Bia
+              <span className="block text-[10px] font-sans font-medium tracking-[0.25em] uppercase opacity-80">
+                Festas Maricá
+              </span>
+            </span>
+          </a>
 
-1. manifest.webmanifest na pasta public/ com: name e short_name do projeto, start_url "/", display "standalone", background_color "#000000", theme_color usando a cor primária do projeto, orientation "portrait-primary", icons com tamanhos 192x192 e 512x512 (gere ícones placeholder SVG se não tiver)
+          <nav className="hidden items-center gap-7 md:flex">
+            {NAV.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className={`text-sm font-medium transition-colors hover:text-primary ${
+                  scrolled ? "text-foreground/80" : "text-primary-foreground/90 drop-shadow"
+                }`}
+              >
+                {item.label}
+              </a>
+            ))}
+            <a
+              href={waLink("Olá! Gostaria de um orçamento para minha festa.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-transform hover:scale-105"
+            >
+              <WhatsAppIcon className="size-4" />
+              WhatsApp
+            </a>
+          </nav>
 
-2. Service Worker em public/sw.js com: cache-first pra assets estáticos (JS, CSS, imagens), network-first pra chamadas de API, skip waiting e claim clients
-
-3. Meta tags mobile no index.html ou __root.tsx: meta theme-color, meta apple-mobile-web-app-capable "yes", meta apple-mobile-web-app-status-bar-style "black-translucent", meta mobile-web-app-capable "yes", link rel manifest href "/manifest.webmanifest", viewport com width=device-width initial-scale=1 viewport-fit=cover
-
-4. Registrar o SW no entry point principal: if('serviceWorker' in navigator){"{"}window.addEventListener('load',()=&gt;{"{"}navigator.serviceWorker.register('/sw.js'){"}"}){"}"}
-
-5. capacitor.config.json na raiz do projeto com: appId baseado no domínio do projeto, appName com nome do projeto, webDir "dist", server.androidScheme "https"
-
-6. Ajustes CSS mobile: html{"{"}-webkit-tap-highlight-color:transparent{"}"} body{"{"}overscroll-behavior:none{"}"} garantir inputs com font-size &gt;= 16px
-
-NÃO mude lógica de negócio, rotas ou funcionalidades. Apenas adicione o necessário pra PWA/mobile.
-      {/* Hero Section */}
-      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img 
-            src={heroFesta}
-            width={1920}
-            height={1080}
-            alt="Salão de festa elegante decorado com balões cor-de-rosa e dourados em Maricá" 
-            className="w-full h-full object-cover brightness-50"
-          />
+          <button
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Abrir menu"
+            className={`grid size-10 place-items-center rounded-full md:hidden ${
+              scrolled ? "bg-secondary text-foreground" : "bg-background/25 text-primary-foreground"
+            }`}
+          >
+            {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          </button>
         </div>
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="relative z-10 text-center text-white px-4"
-        >
-          <h1 className="text-4xl md:text-7xl font-serif font-bold mb-6 tracking-tight">Seu sonho de festa começa aqui</h1>
-          <p className="text-lg md:text-xl mb-10 max-w-2xl mx-auto opacity-90">Buffet, decoração e toda a estrutura para transformar sua comemoração em um momento inesquecível.</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-white px-8 h-14 text-lg rounded-full" asChild>
-              <a href={whatsappLink}>Solicitar orçamento</a>
-            </Button>
-            <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/20 h-14 px-8 text-lg rounded-full backdrop-blur-sm">Conheça nossos serviços</Button>
+
+        {open && (
+          <div className="border-t border-border bg-background px-5 pb-5 md:hidden">
+            <nav className="flex flex-col">
+              {NAV.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className="border-b border-border/60 py-3 text-sm font-medium text-foreground/80"
+                >
+                  {item.label}
+                </a>
+              ))}
+              <a
+                href={waLink("Olá! Gostaria de um orçamento para minha festa.")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground"
+              >
+                <WhatsAppIcon className="size-4" />
+                Fale conosco pelo WhatsApp
+              </a>
+            </nav>
           </div>
-        </motion.div>
+        )}
+      </header>
+
+      {/* Hero */}
+      <section id="inicio" className="relative min-h-[92vh] w-full overflow-hidden">
+        <img
+          src={heroFesta}
+          alt="Festa decorada com balões e mesa de bolo em Maricá"
+          width={1024}
+          height={1024}
+          className="absolute inset-0 size-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-foreground/70 via-foreground/45 to-foreground/80" />
+        <div className="relative mx-auto flex min-h-[92vh] max-w-4xl flex-col items-center justify-center px-5 pt-28 pb-20 text-center">
+          <Reveal>
+            <span className="inline-flex items-center gap-2 rounded-full border border-gold-soft/50 bg-background/15 px-4 py-1.5 text-xs font-semibold tracking-[0.2em] text-primary-foreground uppercase backdrop-blur">
+              <Star className="size-3.5 text-gold" /> Festas • Buffet • Decoração
+            </span>
+          </Reveal>
+          <Reveal delay={120}>
+            <h1 className="mt-6 text-4xl leading-[1.1] font-bold text-primary-foreground text-balance-pretty sm:text-5xl md:text-6xl">
+              Sua festa dos sonhos <span className="text-gold">começa aqui!</span>
+            </h1>
+          </Reveal>
+          <Reveal delay={240}>
+            <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-primary-foreground/90 text-balance-pretty sm:text-lg">
+              Levamos buffet, decoração e toda a festa até o seu espaço 🎉 Ou escolha a festa com
+              local: realizaremos seu sonho por completo.
+            </p>
+          </Reveal>
+          <Reveal delay={360}>
+            <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row">
+              <a
+                href={waLink("Olá, Duda & Bia! Quero fazer uma festa e gostaria de um orçamento.")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-semibold text-primary-foreground shadow-xl shadow-primary/30 transition-transform hover:scale-105 sm:text-base"
+              >
+                <WhatsAppIcon className="size-5" />
+                Fale conosco pelo WhatsApp
+              </a>
+              <a
+                href="#servicos"
+                className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/40 bg-background/10 px-8 py-4 text-sm font-semibold text-primary-foreground backdrop-blur transition-colors hover:bg-background/20 sm:text-base"
+              >
+                Conheça nossos serviços
+              </a>
+            </div>
+          </Reveal>
+        </div>
       </section>
 
-      {/* Formatos de Atendimento */}
-      <section className="py-24 px-4 container mx-auto">
-        <div className="grid md:grid-cols-2 gap-12">
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }} 
-            whileInView={{ opacity: 1, x: 0 }} 
-            viewport={{ once: true }}
-            className="p-10 rounded-[2.5rem] bg-accent/30 border border-primary/10"
-          >
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">Levamos a festa até você</h2>
-            <p className="mb-8 text-lg text-muted-foreground leading-relaxed">Você escolhe o local e nós cuidamos do restante. Levamos buffet, decoração e toda a estrutura necessária para transformar o seu espaço em uma festa completa e especial.</p>
-            <ul className="grid grid-cols-2 gap-6">
-              {['Buffet Completo', 'Decoração Temática', 'Estrutura de Festa', 'Organização Total'].map(item => (
-                <li key={item} className="flex items-center gap-3 font-medium"><Sparkles className="h-5 w-5 text-primary" /> {item}</li>
+      {/* Sobre */}
+      <section id="sobre" className="mx-auto max-w-6xl px-5 py-20 md:py-28">
+        <div className="grid items-center gap-12 md:grid-cols-2">
+          <div className="relative">
+            <img
+              src={decoracao}
+              alt="Decoração de festa com arco de balões rosa e dourado"
+              width={1024}
+              height={1024}
+              loading="lazy"
+              className="aspect-4/5 w-full rounded-[2rem] object-cover shadow-2xl shadow-primary/15"
+            />
+            <div className="absolute -bottom-6 -right-4 hidden rounded-2xl bg-card px-6 py-5 shadow-xl sm:block">
+              <p className="font-display text-2xl font-bold text-primary">Do seu jeito</p>
+              <p className="text-sm text-muted-foreground">cada detalhe pensado com carinho</p>
+            </div>
+          </div>
+          <div>
+            <p className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">
+              Sobre nós
+            </p>
+            <h2 className="mt-4 text-3xl font-bold text-balance-pretty sm:text-4xl">
+              Uma festa completa, feita com dedicação
+            </h2>
+            <p className="mt-5 leading-relaxed text-muted-foreground">
+              A Duda &amp; Bia Festas nasceu do amor por celebrar. Cuidamos do buffet, da decoração
+              e de toda a estrutura para que você aproveite o momento ao lado de quem ama — sem
+              preocupação com nada.
+            </p>
+            <p className="mt-4 leading-relaxed text-muted-foreground">
+              Atendemos Maricá e região, com atendimento personalizado do primeiro contato até o
+              último detalhe do seu evento.
+            </p>
+            <ul className="mt-7 grid gap-3 sm:grid-cols-2">
+              {[
+                "Atendimento personalizado",
+                "Buffet caprichado",
+                "Decoração criativa",
+                "Organização completa",
+              ].map((item) => (
+                <li key={item} className="flex items-center gap-2 text-sm font-medium">
+                  <span className="grid size-5 shrink-0 place-items-center rounded-full bg-primary/12 text-primary">
+                    <Check className="size-3" />
+                  </span>
+                  {item}
+                </li>
               ))}
             </ul>
-          </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0, x: 20 }} 
-            whileInView={{ opacity: 1, x: 0 }} 
-            viewport={{ once: true }}
-            className="p-10 rounded-[2.5rem] bg-primary/5 border border-primary/10 flex flex-col justify-between"
-          >
-            <div>
-              <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">Festa com local</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">Quer praticidade e tranquilidade? Escolha a opção com local e deixe que a Duda e Bia cuidem de todos os detalhes para realizar seu sonho por completo.</p>
-            </div>
-            <Button className="mt-12 h-14 rounded-full text-lg" size="lg" asChild>
-                <a href={whatsappLink}>Agendar visita ao local</a>
-            </Button>
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-24 bg-muted/50 px-4">
-        <div className="container mx-auto">
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-center mb-16">Nossos Serviços</h2>
-          <div className="grid md:grid-cols-3 gap-8">
+      {/* Dois formatos */}
+      <section className="bg-accent/50 py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-5">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">
+              Escolha como quer celebrar
+            </p>
+            <h2 className="mt-4 text-3xl font-bold text-balance-pretty sm:text-4xl">
+              Dois formatos, a mesma dedicação
+            </h2>
+          </div>
+
+          <div className="mt-12 grid gap-8 md:grid-cols-2">
             {[
-              { title: 'Buffet', icon: ChefHat, desc: 'Variedade e sabor em cada prato, preparado com ingredientes selecionados.' },
-              { title: 'Decoração', icon: Sparkles, desc: 'Cenários mágicos e personalizados que contam a sua história.' },
-              { title: 'Festas Infantis', icon: Calendar, desc: 'Toda a alegria e diversão que os pequenos merecem.' },
-              { title: 'Festas de Aniversário', icon: Calendar, desc: 'Celebre a vida com elegância e praticidade.' },
-              { title: 'Eventos Personalizados', icon: Sparkles, desc: 'Do corporativo ao social, cuidamos de cada detalhe.' },
-              { title: 'Organização Completa', icon: Sparkles, desc: 'Tranquilidade total para você aproveitar a festa.' }
-            ].map((service) => (
-              <Card key={service.title} className="hover:shadow-2xl transition-all duration-500 border-none bg-card shadow-sm group rounded-3xl overflow-hidden">
-                <CardHeader className="pt-10">
-                  <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                    <service.icon className="h-8 w-8 text-primary" />
-                  </div>
-                  <CardTitle className="text-2xl">{service.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="pb-10">
-                  <p className="text-muted-foreground text-lg">{service.desc}</p>
-                </CardContent>
-              </Card>
+              {
+                img: festaCliente,
+                title: "Levamos a festa até você",
+                text: "Buffet, decoração e toda a estrutura montada no espaço escolhido por você. Você indica o local, a gente transforma em festa.",
+                items: ["Buffet completo", "Decoração temática", "Estrutura e montagem"],
+                msg: "Olá! Quero uma festa no meu espaço. Podem me passar um orçamento?",
+              },
+              {
+                img: festaLocal,
+                title: "Festa completa com local",
+                text: "Local, decoração, buffet e organização em uma solução completa. Praticidade total: você só precisa aproveitar.",
+                items: ["Local incluso", "Buffet e decoração", "Organização do evento"],
+                msg: "Olá! Tenho interesse na festa com local incluso. Podem me passar detalhes?",
+              },
+            ].map((card) => (
+              <article
+                key={card.title}
+                className="group overflow-hidden rounded-[2rem] bg-card shadow-lg shadow-primary/10 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-primary/20"
+              >
+                <div className="relative h-60 overflow-hidden">
+                  <img
+                    src={card.img}
+                    alt={card.title}
+                    width={1024}
+                    height={1024}
+                    loading="lazy"
+                    className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-7">
+                  <h3 className="text-2xl font-bold">{card.title}</h3>
+                  <p className="mt-3 leading-relaxed text-muted-foreground">{card.text}</p>
+                  <ul className="mt-5 space-y-2">
+                    {card.items.map((i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm font-medium">
+                        <span className="size-1.5 rounded-full bg-gold" />
+                        {i}
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href={waLink(card.msg)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-7 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:scale-105"
+                  >
+                    <WhatsAppIcon className="size-4" />
+                    Pedir orçamento
+                  </a>
+                </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Gallery Section */}
-      <section className="py-24 px-4 container mx-auto">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6">Momentos que merecem ser lembrados</h2>
-          <p className="text-lg text-muted-foreground">Confira alguns dos eventos realizados pela Duda e Bia. Qualidade e capricho em cada detalhe.</p>
+      {/* Serviços */}
+      <section id="servicos" className="mx-auto max-w-6xl px-5 py-20 md:py-28">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">Serviços</p>
+          <h2 className="mt-4 text-3xl font-bold text-balance-pretty sm:text-4xl">
+            Tudo que sua festa precisa
+          </h2>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {galeria.map((src, i) => (
-            <motion.div 
-              key={i} 
-              initial={{ opacity: 0, scale: 0.9 }} 
-              whileInView={{ opacity: 1, scale: 1 }} 
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="aspect-square rounded-[2rem] overflow-hidden bg-muted group cursor-pointer shadow-md"
-            >
-              <img 
-                src={src}
-                loading="lazy"
-                width={1024}
-                height={1024}
-                alt="Festa e decoração realizada pela Duda e Bia Festas Maricá" 
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-              />
-            </motion.div>
-          ))}
-        </div>
-      </section>
 
-      {/* Diferencial */}
-      <section className="py-24 bg-primary text-white px-4 text-center overflow-hidden relative">
-        <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-            <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-white rounded-full blur-3xl"></div>
-            <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-white rounded-full blur-3xl"></div>
-        </div>
-        <div className="container mx-auto max-w-3xl relative z-10">
-          <h2 className="text-4xl md:text-5xl font-serif font-bold mb-8">Uma festa completa, do seu jeito</h2>
-          <p className="text-xl opacity-90 mb-10 leading-relaxed">
-            A Duda e Bia assume toda a produção da festa, desde o buffet e decoração até a estrutura e organização. 
-            Praticidade e capricho para você apenas aproveitar o momento.
-          </p>
-          <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90 font-bold h-14 px-10 rounded-full text-lg" asChild>
-            <a href={whatsappLink}>Saiba Mais</a>
-          </Button>
-        </div>
-      </section>
-
-      {/* Como Funciona */}
-      <section className="py-24 px-4 container mx-auto">
-        <h2 className="text-4xl font-serif font-bold text-center mb-20">Como Funciona</h2>
-        <div className="grid md:grid-cols-4 gap-12 relative">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {[
-            { step: '1', title: 'Você entra em contato', desc: 'Fale conosco via WhatsApp ou formulário.' },
-            { step: '2', title: 'Conta seu sonho', desc: 'Conte para a gente como imagina sua festa.' },
-            { step: '3', title: 'Montamos a proposta', desc: 'Criamos um projeto personalizado para você.' },
-            { step: '4', title: 'Vocês realizam o evento', desc: 'Nós cuidamos de tudo no grande dia.' }
-          ].map((item, idx) => (
-            <div key={item.step} className="text-center relative">
-              <div className="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-8 shadow-xl shadow-primary/20 relative z-10">
-                {item.step}
+            {
+              icon: Sparkles,
+              img: decoracao,
+              title: "Decoração de festas",
+              text: "Painéis, balões, mesas temáticas e ambientação sob medida para o seu tema.",
+            },
+            {
+              icon: Cake,
+              img: buffetImg,
+              title: "Buffet",
+              text: "Salgados, doces, bebidas e mesa montada com apresentação caprichada.",
+            },
+            {
+              icon: PartyPopper,
+              img: heroFesta,
+              title: "Festas completas",
+              text: "Da proposta à montagem: cuidamos de toda a produção do seu evento.",
+            },
+            {
+              icon: MapPin,
+              img: festaCliente,
+              title: "Festas no espaço do cliente",
+              text: "Levamos estrutura, buffet e decoração até o local que você escolher.",
+            },
+            {
+              icon: Heart,
+              img: festaLocal,
+              title: "Festas com local",
+              text: "Solução completa com local incluso, pronta para receber seus convidados.",
+            },
+            {
+              icon: Star,
+              img: galeria2,
+              title: "Eventos personalizados",
+              text: "Aniversários, chás, batizados e comemorações do jeitinho que você imaginou.",
+            },
+          ].map((s) => (
+            <article
+              key={s.title}
+              className="group overflow-hidden rounded-3xl bg-card shadow-md shadow-primary/8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-primary/20"
+            >
+              <div className="relative h-44 overflow-hidden">
+                <img
+                  src={s.img}
+                  alt={s.title}
+                  width={1024}
+                  height={1024}
+                  loading="lazy"
+                  className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <span className="absolute bottom-3 left-3 grid size-10 place-items-center rounded-full bg-card text-primary shadow-lg">
+                  <s.icon className="size-5" />
+                </span>
               </div>
-              <h3 className="text-xl font-bold mb-4">{item.title}</h3>
-              <p className="text-muted-foreground leading-relaxed">{item.desc}</p>
+              <div className="p-6">
+                <h3 className="text-lg font-bold">{s.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.text}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* Galeria */}
+      <section id="galeria" className="bg-secondary/60 py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-5">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">
+              Galeria
+            </p>
+            <h2 className="mt-4 text-3xl font-bold text-balance-pretty sm:text-4xl">
+              Momentos que merecem ser lembrados
+            </h2>
+          </div>
+
+          <div className="mt-12 grid auto-rows-[200px] grid-cols-2 gap-4 md:grid-cols-4">
+            {[
+              { src: heroFesta, alt: "Festa completa decorada", span: "col-span-2 row-span-2" },
+              { src: decoracao, alt: "Arco de balões rosa e dourado", span: "col-span-2" },
+              { src: buffetImg, alt: "Mesa de buffet para festa", span: "" },
+              { src: galeria1, alt: "Detalhes da decoração", span: "" },
+              { src: festaLocal, alt: "Salão de festas decorado", span: "col-span-2 row-span-1" },
+              { src: galeria2, alt: "Mesa de doces", span: "" },
+              { src: galeria3, alt: "Ambiente da festa", span: "" },
+              { src: festaCliente, alt: "Festa montada no espaço do cliente", span: "col-span-2" },
+            ].map((g, i) => (
+              <figure
+                key={i}
+                className={`group relative overflow-hidden rounded-3xl shadow-md ${g.span}`}
+              >
+                <img
+                  src={g.src}
+                  alt={g.alt}
+                  width={1024}
+                  height={1024}
+                  loading="lazy"
+                  className="size-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-foreground/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Festa com local (destaque) */}
+      <section id="festa-com-local" className="relative overflow-hidden py-20 md:py-28">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 md:grid-cols-2">
+          <div className="order-2 md:order-1">
+            <p className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">
+              Festa com local
+            </p>
+            <h2 className="mt-4 text-3xl font-bold text-balance-pretty sm:text-4xl">
+              Realizaremos seu sonho por completo
+            </h2>
+            <p className="mt-5 leading-relaxed text-muted-foreground">
+              Quer praticidade total? Escolha a opção com local e deixe tudo com a Duda &amp; Bia:
+              espaço, decoração, buffet e organização em um único pacote, pensado para você só
+              precisar aproveitar.
+            </p>
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              {[
+                { t: "Local preparado", d: "Ambiente montado e decorado para o seu tema." },
+                { t: "Buffet incluso", d: "Cardápio combinado com você, servido com capricho." },
+                { t: "Decoração completa", d: "Painéis, balões e mesa principal impecáveis." },
+                { t: "Organização", d: "Acompanhamento do início ao fim do evento." },
+              ].map((b) => (
+                <div key={b.t} className="rounded-2xl bg-card p-5 shadow-sm">
+                  <p className="font-semibold">{b.t}</p>
+                  <p className="mt-1 text-sm text-muted-foreground">{b.d}</p>
+                </div>
+              ))}
+            </div>
+            <a
+              href={waLink("Olá! Quero saber sobre a festa com local incluso.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-transform hover:scale-105"
+            >
+              <WhatsAppIcon className="size-4" />
+              Consultar disponibilidade
+            </a>
+          </div>
+          <div className="order-1 md:order-2">
+            <img
+              src={festaLocal}
+              alt="Salão de festas completo decorado em tons de rosa e dourado"
+              width={1024}
+              height={1024}
+              loading="lazy"
+              className="aspect-square w-full rounded-[2rem] object-cover shadow-2xl shadow-primary/15"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Por que escolher */}
+      <section className="bg-accent/50 py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-5">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-3xl font-bold text-balance-pretty sm:text-4xl">
+              Por que escolher a Duda &amp; Bia?
+            </h2>
+          </div>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+            {[
+              { icon: Heart, t: "Atendimento personalizado", d: "Conversamos de perto para entender o seu sonho." },
+              { icon: Sparkles, t: "Criatividade", d: "Decoração pensada para o seu tema e estilo." },
+              { icon: PartyPopper, t: "Praticidade", d: "Você escolhe, nós montamos e organizamos tudo." },
+              { icon: Check, t: "Organização", d: "Prazos cumpridos e evento fluindo do jeito certo." },
+              { icon: Star, t: "Cuidado nos detalhes", d: "Capricho em cada mesa, arranjo e acabamento." },
+            ].map((f) => (
+              <div
+                key={f.t}
+                className="rounded-3xl bg-card p-6 text-center shadow-md shadow-primary/8 transition-transform duration-300 hover:-translate-y-1.5"
+              >
+                <span className="mx-auto grid size-12 place-items-center rounded-full bg-primary/12 text-primary">
+                  <f.icon className="size-5" />
+                </span>
+                <p className="mt-4 font-semibold">{f.t}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Como funciona */}
+      <section className="mx-auto max-w-6xl px-5 py-20 md:py-28">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">
+            Como funciona
+          </p>
+          <h2 className="mt-4 text-3xl font-bold text-balance-pretty sm:text-4xl">
+            Simples do começo ao fim
+          </h2>
+        </div>
+        <div className="mt-12 grid gap-6 md:grid-cols-4">
+          {[
+            { n: "01", t: "Você entra em contato", d: "Fale com a gente pelo WhatsApp." },
+            { n: "02", t: "Conta como imagina", d: "Tema, data, número de convidados e local." },
+            { n: "03", t: "Montamos a proposta", d: "Enviamos um orçamento personalizado." },
+            { n: "04", t: "Realizamos o evento", d: "Cuidamos de tudo no grande dia." },
+          ].map((s) => (
+            <div key={s.n} className="relative rounded-3xl border border-border bg-card p-7">
+              <span className="font-display text-4xl font-bold text-primary/25">{s.n}</span>
+              <p className="mt-3 font-semibold">{s.t}</p>
+              <p className="mt-2 text-sm text-muted-foreground">{s.d}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Sobre Nós */}
-      <section className="py-24 bg-muted/30 px-4">
-        <div className="container mx-auto max-w-5xl grid md:grid-cols-2 gap-16 items-center">
-          <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-            <h2 className="text-4xl font-serif font-bold mb-8">Sobre a Duda e Bia</h2>
-            <p className="text-xl text-primary font-medium mb-6 italic">"Transformando sonhos em memórias inesquecíveis."</p>
-            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-              Com dedicação e capricho, nossa equipe trabalha para que cada evento seja único. 
-              Do buffet artesanal à decoração impecável, nosso compromisso é com a sua felicidade e a de seus convidados.
+      {/* Depoimentos */}
+      <section className="bg-secondary/60 py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-5">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">
+              Depoimentos
             </p>
-            <div className="space-y-4">
-              <div className="flex items-center gap-4 text-lg font-medium text-primary"><div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center"><Star className="h-5 w-5 fill-current" /></div> Experiência e Confiança</div>
-              <div className="flex items-center gap-4 text-lg font-medium text-primary"><div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center"><Star className="h-5 w-5 fill-current" /></div> Dedicação em cada detalhe</div>
-              <div className="flex items-center gap-4 text-lg font-medium text-primary"><div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center"><Star className="h-5 w-5 fill-current" /></div> Atendimento Acolhedor</div>
-            </div>
-          </motion.div>
-          <motion.div 
-            initial={{ opacity: 0, x: 20 }} 
-            whileInView={{ opacity: 1, x: 0 }} 
-            viewport={{ once: true }}
-            className="rounded-[3rem] overflow-hidden shadow-2xl relative"
-          >
-            <img src={galeria1} loading="lazy" width={1024} height={1024} alt="Decoração de festa produzida pela Duda e Bia" className="w-full h-full object-cover aspect-[4/5]" />
-          </motion.div>
+            <h2 className="mt-4 text-3xl font-bold text-balance-pretty sm:text-4xl">
+              O que dizem nossos clientes
+            </h2>
+            <p className="mt-4 text-sm text-muted-foreground">
+              Envie o seu depoimento e ele aparecerá aqui.
+            </p>
+          </div>
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {[1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className="flex min-h-45 flex-col justify-between rounded-3xl border border-dashed border-primary/30 bg-card/60 p-7"
+              >
+                <Quote className="size-6 text-primary/40" />
+                <p className="mt-4 text-sm text-muted-foreground">
+                  Espaço reservado para o depoimento de um cliente da Duda &amp; Bia.
+                </p>
+                <div className="mt-6 flex gap-1 text-gold">
+                  {Array.from({ length: 5 }).map((_, k) => (
+                    <Star key={k} className="size-4 fill-current" />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* CTA Final */}
-      <section className="py-32 px-4 text-center bg-accent text-accent-foreground relative overflow-hidden">
-        <div className="container mx-auto max-w-2xl relative z-10">
-          <h2 className="text-4xl md:text-6xl font-serif font-bold mb-8">Vamos realizar esse sonho juntos?</h2>
-          <p className="text-xl opacity-80 mb-12 leading-relaxed">
-            Conte para a Duda e Bia como você imagina sua festa e receba uma proposta personalizada e sem compromisso.
+      {/* Instagram + CTA final */}
+      <section id="contato" className="relative overflow-hidden py-20 md:py-28">
+        <div className="absolute inset-0">
+          <img
+            src={galeria3}
+            alt=""
+            aria-hidden="true"
+            width={1024}
+            height={1024}
+            loading="lazy"
+            className="size-full object-cover"
+          />
+          <div className="absolute inset-0 bg-foreground/75" />
+        </div>
+        <div className="relative mx-auto max-w-3xl px-5 text-center">
+          <h2 className="text-3xl font-bold text-primary-foreground text-balance-pretty sm:text-4xl">
+            Vamos realizar esse sonho juntos?
+          </h2>
+          <p className="mt-5 leading-relaxed text-primary-foreground/85">
+            Conte para a Duda &amp; Bia como você imagina sua festa e receba uma proposta
+            personalizada.
           </p>
-          <Button size="lg" className="bg-primary text-white hover:bg-primary/90 font-bold h-16 px-12 rounded-full text-xl shadow-2xl shadow-primary/20" asChild>
-            <a href={whatsappLink}>Solicitar orçamento pelo WhatsApp</a>
-          </Button>
+          <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a
+              href={waLink("Olá, Duda & Bia! Quero solicitar um orçamento para minha festa.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-semibold text-primary-foreground shadow-xl shadow-primary/30 transition-transform hover:scale-105 sm:text-base"
+            >
+              <WhatsAppIcon className="size-5" />
+              Solicitar orçamento pelo WhatsApp
+            </a>
+            <a
+              href={INSTAGRAM}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/40 bg-background/10 px-8 py-4 text-sm font-semibold text-primary-foreground backdrop-blur transition-colors hover:bg-background/20 sm:text-base"
+            >
+              <Instagram className="size-5" />
+              @dudaebiafestasmarica
+            </a>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-20 bg-background border-t px-4">
-        <div className="container mx-auto grid md:grid-cols-3 gap-16">
+      <footer className="bg-card py-14">
+        <div className="mx-auto grid max-w-6xl gap-10 px-5 sm:grid-cols-3">
           <div>
-            <h3 className="text-2xl font-serif font-bold mb-6 text-primary tracking-tight">Duda e Bia Festas Maricá</h3>
-            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">Buffet, decoração e toda a estrutura para sua festa em Maricá e toda a região metropolitana.</p>
-            <div className="flex gap-6">
-              <a href="https://instagram.com/dudaebiafestasmarica" className="w-10 h-10 rounded-full bg-muted flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300">
-                IG
-              </a>
-              <a href={whatsappLink} className="w-10 h-10 rounded-full bg-muted flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300">
-                WA
-              </a>
+            <div className="flex items-center gap-2">
+              <span className="grid size-9 place-items-center rounded-full bg-primary text-primary-foreground">
+                <Sparkles className="size-4" />
+              </span>
+              <span className="font-display text-lg font-bold">Duda &amp; Bia Festas</span>
             </div>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              Buffet, decoração e festas completas em Maricá e região. Levamos a festa até o seu
+              espaço ou realizamos tudo com local incluso.
+            </p>
           </div>
           <div>
-            <h4 className="text-xl font-bold mb-6">Navegação</h4>
-            <ul className="space-y-4 text-lg text-muted-foreground">
-              <li><a href="#" className="hover:text-primary transition-colors">Início</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Serviços</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Sobre Nós</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Contato</a></li>
+            <p className="text-sm font-semibold">Navegação</p>
+            <ul className="mt-4 space-y-2">
+              {NAV.map((n) => (
+                <li key={n.href}>
+                  <a
+                    href={n.href}
+                    className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                  >
+                    {n.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
           <div>
-            <h4 className="text-xl font-bold mb-6">Onde Atendemos</h4>
-            <p className="text-lg text-muted-foreground flex items-start gap-3"><MapPin className="h-6 w-6 text-primary shrink-0" /> Maricá - RJ e Região Metropolitana</p>
-            <div className="mt-12 pt-12 border-t border-border">
-                <p className="text-sm text-muted-foreground">© 2026 Duda e Bia Festas Maricá. Todos os direitos reservados.</p>
-            </div>
+            <p className="text-sm font-semibold">Contato</p>
+            <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
+              <li className="flex items-center gap-2">
+                <MapPin className="size-4 text-primary" /> Maricá — RJ e região
+              </li>
+              <li>
+                <a
+                  href={waLink("Olá! Vim pelo site da Duda & Bia Festas.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 transition-colors hover:text-primary"
+                >
+                  <WhatsAppIcon className="size-4 text-primary" /> Falar no WhatsApp
+                </a>
+              </li>
+              <li>
+                <a
+                  href={INSTAGRAM}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 transition-colors hover:text-primary"
+                >
+                  <Instagram className="size-4 text-primary" /> @dudaebiafestasmarica
+                </a>
+              </li>
+            </ul>
           </div>
+        </div>
+        <div className="mx-auto mt-10 max-w-6xl border-t border-border px-5 pt-6">
+          <p className="text-xs text-muted-foreground">
+            © {new Date().getFullYear()} Duda &amp; Bia Festas Maricá. Todos os direitos reservados.
+          </p>
         </div>
       </footer>
 
-      {/* Floating WhatsApp */}
-      <a 
-        href={whatsappLink} 
-        aria-label="Contato via WhatsApp"
-        className="fixed bottom-8 right-8 z-50 bg-[#25D366] text-white p-5 rounded-full shadow-[0_10px_40px_rgba(37,211,102,0.4)] hover:scale-110 active:scale-95 transition-all duration-300 group"
+      {/* WhatsApp flutuante */}
+      <a
+        href={waLink("Olá, Duda & Bia! Gostaria de um orçamento.")}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Falar no WhatsApp"
+        className="fixed right-5 bottom-5 z-50 grid size-14 place-items-center rounded-full bg-[#25D366] text-white shadow-2xl transition-transform hover:scale-110"
       >
-        <MessageCircle className="h-9 w-9" />
-        <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 bg-white text-foreground px-4 py-2 rounded-xl text-sm font-bold shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-            Fale conosco agora!
-        </span>
+        <WhatsAppIcon className="size-7" />
       </a>
     </div>
   );
