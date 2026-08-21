@@ -649,7 +649,7 @@ function Index() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-card py-14">
+      <footer className="bg-primary/5 py-14">
         <div className="mx-auto grid max-w-6xl gap-10 px-5 sm:grid-cols-3">
           <div>
             <div className="flex items-center gap-2">
