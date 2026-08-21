@@ -27,6 +27,21 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-white">
+      Preciso que você transforme este projeto em um Progressive Web App (PWA) completo e pronto para ser empacotado como aplicativo mobile nativo. Faça TODAS as alterações abaixo de uma vez:
+
+1. manifest.webmanifest na pasta public/ com: name e short_name do projeto, start_url "/", display "standalone", background_color "#000000", theme_color usando a cor primária do projeto, orientation "portrait-primary", icons com tamanhos 192x192 e 512x512 (gere ícones placeholder SVG se não tiver)
+
+2. Service Worker em public/sw.js com: cache-first pra assets estáticos (JS, CSS, imagens), network-first pra chamadas de API, skip waiting e claim clients
+
+3. Meta tags mobile no index.html ou __root.tsx: meta theme-color, meta apple-mobile-web-app-capable "yes", meta apple-mobile-web-app-status-bar-style "black-translucent", meta mobile-web-app-capable "yes", link rel manifest href "/manifest.webmanifest", viewport com width=device-width initial-scale=1 viewport-fit=cover
+
+4. Registrar o SW no entry point principal: if('serviceWorker' in navigator){"{"}window.addEventListener('load',()=&gt;{"{"}navigator.serviceWorker.register('/sw.js'){"}"}){"}"}
+
+5. capacitor.config.json na raiz do projeto com: appId baseado no domínio do projeto, appName com nome do projeto, webDir "dist", server.androidScheme "https"
+
+6. Ajustes CSS mobile: html{"{"}-webkit-tap-highlight-color:transparent{"}"} body{"{"}overscroll-behavior:none{"}"} garantir inputs com font-size &gt;= 16px
+
+NÃO mude lógica de negócio, rotas ou funcionalidades. Apenas adicione o necessário pra PWA/mobile.
       {/* Hero Section */}
       <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
