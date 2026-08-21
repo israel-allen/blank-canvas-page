@@ -1,11 +1,11 @@
 {
-  "name": "Lovable App",
-  "short_name": "Lovable",
+  "name": "Duda e Bia Festas Maricá",
+  "short_name": "Duda e Bia",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "background_color": "#000000",
-  "theme_color": "#0b1220",
+  "theme_color": "#d946ef",
   "orientation": "portrait-primary",
   "icons": [
     {
