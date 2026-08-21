@@ -137,8 +137,19 @@
     border-color: var(--color-border);
   }
 
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    overscroll-behavior: none;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: max(16px, 1rem);
   }
 }
