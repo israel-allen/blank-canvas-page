@@ -58,6 +58,14 @@ const PUBLIC_GALLERY_PHOTOS = [
     src: "/galeria/WhatsApp%20Image%202026-09-22%20at%2019.02.05%20(1).jpeg",
     alt: "Detalhe especial da decoração",
   },
+  {
+    src: "/galeria/fest.jpeg",
+    alt: "Festa decorada para uma comemoração especial",
+  },
+  {
+    src: "/galeria/buffet-festa.jpeg",
+    alt: "Detalhe de uma festa preparada com carinho",
+  },
 ];
 
 const PHOTOS = [
