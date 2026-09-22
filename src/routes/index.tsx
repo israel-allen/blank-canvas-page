@@ -30,9 +30,33 @@ const NAV = [
   { label: "Início", href: "#inicio" },
   { label: "Sobre", href: "#sobre" },
   { label: "Serviços", href: "#servicos" },
-  { label: "Galeria", href: "#galeria" },
+  { label: "Buffet", href: "#buffet" },
+  { label: "Galeria", href: "/galeria" },
   { label: "Festa com Local", href: "#festa-com-local" },
   { label: "Contato", href: "#contato" },
+];
+
+const BUFFET_PHOTOS = [
+  {
+    src: "/buffet/WhatsApp%20Image%202026-09-22%20at%2019.01.41.jpeg",
+    alt: "Buffet preparado para uma festa",
+  },
+  {
+    src: "/buffet/WhatsApp%20Image%202026-09-22%20at%2019.01.41%20(1).jpeg",
+    alt: "Mesa de buffet preparada para festa",
+  },
+  {
+    src: "/buffet/WhatsApp%20Image%202026-09-22%20at%2019.01.40.jpeg",
+    alt: "Detalhes do buffet para convidados",
+  },
+  {
+    src: "/buffet/WhatsApp%20Image%202026-09-22%20at%2019.01.40%20(2).jpeg",
+    alt: "Comidas e montagem do buffet",
+  },
+  {
+    src: "/buffet/WhatsApp%20Image%202026-09-22%20at%2019.01.40%20(1).jpeg",
+    alt: "Mesa de buffet pronta para servir",
+  },
 ];
 
 export const Route = createFileRoute("/")({
@@ -316,7 +340,7 @@ function Index() {
               Escolha como quer celebrar
             </p>
             <h2 className="mt-4 text-3xl font-bold text-balance-pretty sm:text-4xl">
-              Dois formatos, a mesma dedicação
+              Sua festa, do seu jeito
             </h2>
           </div>
 
@@ -452,13 +476,53 @@ function Index() {
         </div>
       </section>
 
+      {/* Buffet */}
+      <section id="buffet" className="bg-blush/45 py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-5">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">Buffet</p>
+            <h2 className="mt-4 text-3xl font-bold text-balance-pretty sm:text-4xl">
+              Sabor e carinho em cada detalhe
+            </h2>
+            <p className="mt-5 leading-relaxed text-muted-foreground">
+              Um buffet preparado para deixar sua comemoração ainda mais gostosa, bonito na mesa
+              e pronto para receber seus convidados.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {BUFFET_PHOTOS.map((photo, index) => (
+              <figure
+                key={photo.src}
+                className={`group relative overflow-hidden rounded-3xl bg-card shadow-md shadow-primary/10 ${
+                  index === 0 ? "sm:col-span-2 lg:col-span-2" : ""
+                }`}
+              >
+                <img
+                  src={photo.src}
+                  alt={photo.alt}
+                  width={1024}
+                  height={1024}
+                  loading="lazy"
+                  className="aspect-[4/3] size-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-foreground/35 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Galeria */}
       <section id="galeria" className="bg-secondary/60 py-20 md:py-28">
         <div className="mx-auto max-w-6xl px-5">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">
+            <a
+              href="/galeria"
+              className="inline-block text-xs font-semibold tracking-[0.25em] text-primary uppercase transition-colors hover:text-primary/70"
+            >
               Galeria
-            </p>
+            </a>
             <h2 className="mt-4 text-3xl font-bold text-balance-pretty sm:text-4xl">
               Momentos que merecem ser lembrados
             </h2>
@@ -544,6 +608,15 @@ function Index() {
           </div>
         </div>
       </section>
+
+      <div className="flex justify-center bg-background px-5 pt-10 text-center">
+        <a
+          href="/galeria"
+          className="inline-block text-base font-semibold tracking-[0.2em] text-primary uppercase transition-colors hover:text-primary/70"
+        >
+          Ver mais em Galeria
+        </a>
+      </div>
 
       {/* Por que escolher */}
       <section className="bg-accent/50 py-20 md:py-28">
@@ -659,8 +732,8 @@ function Index() {
               <span className="font-display text-lg font-bold">Duda &amp; Bia Festas</span>
             </div>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              Buffet, decoração e festas completas em Maricá e região. Levamos a festa até o seu
-              espaço ou realizamos tudo com local incluso.
+              Buffet, decoração e festas completas em Maricá e região. Também realizamos festas no
+              local.
             </p>
           </div>
           <div>
@@ -720,9 +793,20 @@ function Index() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="21 988522664"
-        className="fixed right-5 bottom-5 z-50 grid size-14 place-items-center rounded-full bg-[#25D366] text-white shadow-2xl transition-transform hover:scale-110"
+        className="fixed right-5 bottom-24 z-50 grid size-14 place-items-center rounded-full bg-[#25D366] text-white shadow-2xl transition-transform hover:scale-110"
       >
         <WhatsAppIcon className="size-7" />
+      </a>
+
+      {/* Instagram flutuante */}
+      <a
+        href={INSTAGRAM}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Instagram @dudaebiafestasmarica"
+        className="fixed right-5 bottom-5 z-50 grid size-14 place-items-center rounded-full bg-gradient-to-br from-[#f58529] via-[#dd2a7b] to-[#8134af] text-white shadow-2xl transition-transform hover:scale-110"
+      >
+        <Instagram className="size-7" />
       </a>
     </div>
   );
