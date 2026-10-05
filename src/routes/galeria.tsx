@@ -1,9 +1,9 @@
+import { useState } from "react";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 
 import decoracao from "../assets/decoracao.jpg";
 import festaCliente from "../assets/festa-cliente.jpg";
-import festaLocal from "../assets/festa-local.jpg";
 import galeria1 from "../assets/galeria-1.jpg";
 import galeria2 from "../assets/galeria-2.jpg";
 import galeria3 from "../assets/galeria-3.jpg";
@@ -15,7 +15,6 @@ const ASSET_PHOTOS = [
   { src: decoracao, alt: "Arco de balões rosa e dourado" },
   { src: buffetImg, alt: "Mesa de buffet para festa" },
   { src: festaCliente, alt: "Festa montada no espaço do cliente" },
-  { src: festaLocal, alt: "Salão de festas decorado" },
   { src: galeria1, alt: "Detalhes da decoração" },
   { src: galeria2, alt: "Mesa de doces" },
   { src: galeria3, alt: "Ambiente da festa" },
@@ -82,10 +81,6 @@ const PUBLIC_GALLERY_PHOTOS = [
     alt: "Detalhe de decoração temática",
   },
   {
-    src: "/galeria/WhatsApp%20Image%202026-09-22%20at%2019.02.04%20(4).jpeg",
-    alt: "Ambientação de festa para convidados",
-  },
-  {
     src: "/galeria/WhatsApp%20Image%202026-09-22%20at%2019.02.04%20(2).jpeg",
     alt: "Mesa de doces decorada",
   },
@@ -98,20 +93,8 @@ const PUBLIC_GALLERY_PHOTOS = [
     alt: "Detalhes de uma festa completa",
   },
   {
-    src: "/galeria/WhatsApp%20Image%202026-09-22%20at%2019.02.05%20(3).jpeg",
-    alt: "Decoração pronta para receber convidados",
-  },
-  {
     src: "/galeria/WhatsApp%20Image%202026-09-22%20at%2019.02.05%20(2).jpeg",
     alt: "Mesa temática em uma comemoração",
-  },
-  {
-    src: "/galeria/WhatsApp%20Image%202026-09-22%20at%2019.02.05%20(1).jpeg",
-    alt: "Detalhe especial da decoração",
-  },
-  {
-    src: "/galeria/fest.jpeg",
-    alt: "Festa decorada para uma comemoração especial",
   },
   {
     src: "/galeria/buffet-festa.jpeg",
@@ -120,26 +103,13 @@ const PUBLIC_GALLERY_PHOTOS = [
 ];
 
 const NEW_PHOTOS = [
-  { src: "/novas%20fotos/15%20anos%20debut.jpeg", alt: "Festa de 15 anos debut" },
   {
-    src: "/novas%20fotos/WhatsApp%20Image%202026-10-05%20at%2015.03.18.jpeg",
-    alt: "Festa decorada com mesa e balões",
-  },
-  {
-    src: "/novas%20fotos/WhatsApp%20Image%202026-10-05%20at%2015.03.19.jpeg",
-    alt: "Noivos celebrando em uma festa",
-  },
-  {
-    src: "/novas%20fotos/WhatsApp%20Image%202026-10-05%20at%2015.07.41%20(1).jpeg",
-    alt: "Decoração de festa com balões",
+    src: "/novas%20fotos/decoracao5.jpg",
+    alt: "Decoração de festa",
   },
   {
     src: "/novas%20fotos/WhatsApp%20Image%202026-10-05%20at%2015.07.41%20(2).jpeg",
     alt: "Mesa decorada para comemoração",
-  },
-  {
-    src: "/novas%20fotos/WhatsApp%20Image%202026-10-05%20at%2015.07.41.jpeg",
-    alt: "Festa infantil com decoração colorida",
   },
   {
     src: "/novas%20fotos/WhatsApp%20Image%202026-10-05%20at%2015.07.4441%20(1).jpeg",
@@ -150,9 +120,7 @@ const NEW_PHOTOS = [
     alt: "Festa com decoração especial",
   },
   { src: "/novas%20fotos/paisagem.jpeg", alt: "Decoração de festa ao ar livre" },
-  { src: "/novas%20fotos/paisagem3.jpeg", alt: "Celebração ao ar livre" },
   { src: "/novas%20fotos/paquita%20roxa.jpeg", alt: "Decoração de festa em tons roxos" },
-  { src: "/novas%20fotos/paquitas.jpeg", alt: "Decoração de festa Paquitas" },
 ];
 
 const PHOTOS = [
@@ -161,6 +129,35 @@ const PHOTOS = [
   ...PUBLIC_GALLERY_PHOTOS,
   ...NEW_PHOTOS,
 ];
+
+function GalleryPhoto({ photo }: { photo: { src: string; alt: string } }) {
+  const [orientation, setOrientation] = useState<"horizontal" | "vertical" | null>(null);
+
+  return (
+    <figure
+      className={`relative overflow-hidden rounded-3xl shadow-md ${
+        orientation === "horizontal"
+          ? "aspect-[4/3]"
+          : orientation === "vertical"
+            ? "aspect-[3/4]"
+            : "aspect-square"
+      }`}
+    >
+      <img
+        src={photo.src}
+        alt={photo.alt}
+        width={1024}
+        height={1024}
+        loading="lazy"
+        onLoad={(event) => {
+          const { naturalWidth, naturalHeight } = event.currentTarget;
+          setOrientation(naturalWidth >= naturalHeight ? "horizontal" : "vertical");
+        }}
+        className="size-full rounded-3xl object-cover"
+      />
+    </figure>
+  );
+}
 
 export const Route = createFileRoute("/galeria")({
   head: () => ({
@@ -211,19 +208,7 @@ function GalleryPage() {
 
           <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4">
             {PHOTOS.map((photo) => (
-              <figure
-                key={photo.alt}
-                className="relative aspect-square overflow-hidden rounded-3xl bg-card shadow-md"
-              >
-                <img
-                  src={photo.src}
-                  alt={photo.alt}
-                  width={1024}
-                  height={1024}
-                  loading="lazy"
-                  className="size-full object-contain"
-                />
-              </figure>
+              <GalleryPhoto key={photo.src} photo={photo} />
             ))}
           </div>
 

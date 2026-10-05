@@ -38,7 +38,6 @@ const NAV = [
   { label: "Buffet", href: "#buffet" },
   { label: "Galeria", href: "/galeria" },
   { label: "Depoimentos", href: "#depoimentos" },
-  { label: "Festa com Local", href: "#festa-com-local" },
   { label: "Contato", href: "#contato" },
 ];
 
@@ -231,7 +230,7 @@ function Testimonials() {
                   <figure className="flex h-full min-h-80 flex-col justify-between rounded-3xl border border-primary/10 bg-card p-7 shadow-lg shadow-primary/8 sm:p-10">
                     <div>
                       <Quote className="mb-5 size-8 text-primary" aria-hidden="true" />
-                      <blockquote className="text-base leading-relaxed text-muted-foreground sm:text-lg">
+                      <blockquote className="rounded-2xl bg-[oklch(0.97_0.025_350)] p-5 text-base leading-relaxed text-[oklch(0.36_0.03_340)] sm:text-lg">
                         {testimonial.text}
                       </blockquote>
                     </div>
