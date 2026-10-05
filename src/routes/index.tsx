@@ -58,6 +58,14 @@ const BUFFET_PHOTOS = [
     src: "/buffet/WhatsApp%20Image%202026-09-22%20at%2019.01.40%20(1).jpeg",
     alt: "Mesa de buffet pronta para servir",
   },
+  {
+    src: "/novas%20fotos/bufet3.jpeg",
+    alt: "Mesa de buffet decorada",
+  },
+  {
+    src: "/novas%20fotos/bufet4.jpeg",
+    alt: "Detalhes de um buffet para festa",
+  },
 ];
 
 export const Route = createFileRoute("/")({

@@ -42,6 +42,14 @@ const BUFFET_PHOTOS = [
     src: "/buffet/WhatsApp%20Image%202026-09-22%20at%2019.01.41.jpeg",
     alt: "Buffet preparado para uma festa",
   },
+  {
+    src: "/novas%20fotos/bufet3.jpeg",
+    alt: "Mesa de buffet decorada",
+  },
+  {
+    src: "/novas%20fotos/bufet4.jpeg",
+    alt: "Detalhes de um buffet para festa",
+  },
 ];
 
 const PUBLIC_GALLERY_PHOTOS = [
