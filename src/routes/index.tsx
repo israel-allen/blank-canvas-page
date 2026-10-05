@@ -1,10 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
 import {
   Cake,
+  ChevronLeft,
+  ChevronRight,
   Heart,
   MapPin,
   Menu,
+  Quote,
   X,
   Check,
   
@@ -33,8 +37,44 @@ const NAV = [
   { label: "Serviços", href: "#servicos" },
   { label: "Buffet", href: "#buffet" },
   { label: "Galeria", href: "/galeria" },
+  { label: "Depoimentos", href: "#depoimentos" },
   { label: "Festa com Local", href: "#festa-com-local" },
   { label: "Contato", href: "#contato" },
+];
+
+const TESTIMONIALS = [
+  {
+    name: "Rayssa",
+    text: "Roberta, muito bom dia. Eu quero agradecer a você, toda sua equipe, por toda organização, simpatia e perfeição. Todos muito solícitos e educados. Gratidão pela paciência ao longo desses meses de planejamento. Eu só tenho a agradecer e elogiar. Todo mundo falou super bem da comida, dos salgados, bolos e doces — isso eu já sabia que era uma delícia, kkkk. Obrigada por tornar um sonho realizado ainda mais perfeito.",
+  },
+  {
+    name: "Rafaela",
+    text: "Boa noite!! Passando pra te agradecer por toda paciência, carinho e cuidado nos mínimos detalhes, fazendo com que a festa fosse um verdadeiro evento. Recebi muitas mensagens elogiando a decoração, comida e tudo mais. E sem dúvidas ter acreditado em você de olhos fechados foi a minha melhor experiência. Só tenho a te agradecer e elogiar pela linda festa. O circo da Maitê não poderia ter sido melhor, saiu tudo do jeitinho como planejado. E que venha novas festas.",
+  },
+  {
+    name: "Renata",
+    text: "Bom diaaaa, queria te agradecer muito pela excelência no atendimento do seu buffet! A responsável pelo buffet é um anjo e toda a equipe, muito atenciosos! Meus convidados elogiaram muito o atendimento, tudo muito gostoso, quentinho e farto! A torta salgada e o jantar maravilhosos!! Minha filha amou a decoração, ficou do jeitinho que ela sonhou (e olha que ela é exigente e tem gosto diferenciado rsrsrs)! Parabéns! Te desejo muito sucesso e que Deus te abençoe sempre!",
+  },
+  {
+    name: "Jéssica",
+    text: "Oiee, bom dia! Passando pra agradecer por tudoo! A decoração linda demais, todo dentro do tema, eu fiquei encantadaaa! A equipe maravilhosa, atenciosos, a todo tempo me auxiliando. Fiquei tranquila, curti a festa, buffet maravilhoso, todo mundo comeu e bebeu muito haha, só elogios de tudo, estou recebendo várias msgs hoje de convidados elogiando haha. Obrigada mesmo! Foi incrível demais! Ah, a Tia Nana da animação, a recepcionista, as meninas monitoras, todos sem exceção, galera tooop. Tia Nana animou a festa inteira, até os adultos haha, foi de fato memorável. Muito obrigadaa.",
+  },
+  {
+    name: "Bárbara",
+    text: "Quero deixar aqui minha imensa gratidão à você por todo carinho, atenção e cuidado com cada detalhe no aniversário do meu filho. Foi um dia muito especial para nossa família, e o espaço estava simplesmente impecável, organizado e acolhedor. Dá para perceber quando tudo é feito com amor. Obrigada pela dedicação, pela paciência e por tornar o sonho do aniversário do meu filho uma realidade tão linda. Que Deus abençoe cada vez mais o seu trabalho! Com certeza indicarei de olhos fechados!",
+  },
+  {
+    name: "Ana Paula",
+    text: "Bom dia, Roberta, queria te agradecer de coração por tudo! A decoração ficou simplesmente maravilhosa, exatamente do jeitinho que eu sonhei para o primeiro aniversário da Laura. Cada detalhe estava lindo e fez toda a diferença para tornar esse dia tão especial. E o buffet também foi impecável! Tudo muito gostoso, bem organizado e feito com muito carinho. Recebi muitos elogios dos convidados. Obrigada por todo o cuidado, dedicação, carinho e por fazerem parte de um momento tão importante para a nossa família. A festa ficou linda e, com certeza, será uma lembrança que vamos guardar para sempre! Muito obrigada por tudo! Você e sua equipe foram maravilhosos.",
+  },
+  {
+    name: "Natália",
+    text: "Quero agradecer imensamente pela noite maravilhosa e mágica que você realizou para minha filha. Não tenho palavras para agradecer todo comprometimento e carinho. Você deixou do jeitinho que eu idealizei, muito obrigada mesmo. Estamos encantado com tudo que vivemos! Quero agradecer também a toda sua equipe que trabalhou para que essa noite fosse perfeita. Amei todos, as meninas da cozinha são maravilhosas, teve todo cuidado e carinho em guardar tudo pra mim e meu esposo. Aproveitamos tanto que quase não comemos nada. Haha. Obrigada, Roberta, tenho certeza que vamos fazer outras festas juntas, afinal, se tem uma coisa que eu gosto de fazer é festa!",
+  },
+  {
+    name: "Glauciana",
+    text: "Boa tarde, Roberta! Quero agradecer imensamente por terem tornado a festa do Henry simplesmente maravilhosa! Tudo foi perfeito e superou nossas expectativas. A equipe do buffet foi incrível: atenciosa, prestativa e sempre com um sorriso no rosto. A comida estava deliciosa e encantou a todos. A decoração estava perfeita, linda em cada detalhe — um verdadeiro sonho! O animador também foi sensacional: muito simpático, animou a todos e colocou todo mundo para dançar e brincar. Até os adultos entraram na diversão! Estão todos de parabéns pelo excelente trabalho. Sua equipe é maravilhosa! Que Deus abençoe muito todos vocês! Eu amei cada momento... foi um sonho realizado!",
+  },
 ];
 
 const BUFFET_PHOTOS = [
@@ -143,6 +183,97 @@ function Reveal({
     <div className={`animate-rise ${className}`} style={{ animationDelay: `${delay}ms` }}>
       {children}
     </div>
+  );
+}
+
+function Testimonials() {
+  const [carouselRef, carouselApi] = useEmblaCarousel({ loop: true, align: "center" });
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (!carouselApi) return;
+
+    const updateCurrentIndex = () => setCurrentIndex(carouselApi.selectedScrollSnap());
+    updateCurrentIndex();
+    carouselApi.on("select", updateCurrentIndex);
+
+    return () => {
+      carouselApi.off("select", updateCurrentIndex);
+    };
+  }, [carouselApi]);
+
+  return (
+    <section id="depoimentos" className="bg-blush/35 py-20 md:py-28">
+      <div className="mx-auto max-w-4xl px-5">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">
+            Depoimentos dos clientes
+          </p>
+          <h2 className="mt-4 text-3xl font-bold text-balance-pretty sm:text-4xl">
+            Carinho que fica na memória
+          </h2>
+          <p className="mt-5 leading-relaxed text-muted-foreground">
+            Cada mensagem representa um momento especial que tivemos a alegria de preparar.
+          </p>
+        </div>
+
+        <div className="mt-10">
+          <div
+            ref={carouselRef}
+            className="overflow-hidden touch-pan-y"
+            role="region"
+            aria-roledescription="carrossel"
+            aria-label="Depoimentos dos clientes"
+          >
+            <div className="flex items-stretch">
+              {TESTIMONIALS.map((testimonial) => (
+                <div key={testimonial.name} className="min-w-0 flex-[0_0_100%] px-1">
+                  <figure className="flex h-full min-h-80 flex-col justify-between rounded-3xl border border-primary/10 bg-card p-7 shadow-lg shadow-primary/8 sm:p-10">
+                    <div>
+                      <Quote className="mb-5 size-8 text-primary" aria-hidden="true" />
+                      <blockquote className="text-base leading-relaxed text-muted-foreground sm:text-lg">
+                        {testimonial.text}
+                      </blockquote>
+                    </div>
+                    <figcaption className="mt-8 border-t border-border pt-5 font-semibold">
+                      {testimonial.name}
+                      <span className="ml-2 text-sm font-normal text-muted-foreground">
+                        Cliente Duda &amp; Bia
+                      </span>
+                    </figcaption>
+                  </figure>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-6 flex items-center justify-center gap-5">
+            <button
+              type="button"
+              onClick={() => carouselApi?.scrollPrev()}
+              aria-label="Ver depoimento anterior"
+              className="grid size-11 place-items-center rounded-full border border-primary/20 bg-card text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+            >
+              <ChevronLeft className="size-5" />
+            </button>
+            <p className="min-w-20 text-center text-sm text-muted-foreground" aria-live="polite">
+              {currentIndex + 1} de {TESTIMONIALS.length}
+            </p>
+            <button
+              type="button"
+              onClick={() => carouselApi?.scrollNext()}
+              aria-label="Ver próximo depoimento"
+              className="grid size-11 place-items-center rounded-full border border-primary/20 bg-card text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+            >
+              <ChevronRight className="size-5" />
+            </button>
+          </div>
+          <p className="mt-3 text-center text-xs text-muted-foreground">
+            Arraste para o lado para ver outros depoimentos
+          </p>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -580,6 +711,8 @@ function Index() {
           </div>
         </div>
       </section>
+
+      <Testimonials />
 
       {/* Festa com local (destaque) */}
       <section id="festa-com-local" className="relative overflow-hidden py-20 md:py-28">
