@@ -3,11 +3,46 @@ import { ArrowLeft, ExternalLink } from "lucide-react";
 
 import decoracao from "../assets/decoracao.jpg";
 import festaCliente from "../assets/festa-cliente.jpg";
+import festaLocal from "../assets/festa-local.jpg";
 import galeria1 from "../assets/galeria-1.jpg";
 import galeria2 from "../assets/galeria-2.jpg";
 import galeria3 from "../assets/galeria-3.jpg";
 import heroFesta from "../assets/hero-festa.jpg";
 import buffetImg from "../assets/buffet.jpg";
+
+const ASSET_PHOTOS = [
+  { src: heroFesta, alt: "Festa completa decorada" },
+  { src: decoracao, alt: "Arco de balões rosa e dourado" },
+  { src: buffetImg, alt: "Mesa de buffet para festa" },
+  { src: festaCliente, alt: "Festa montada no espaço do cliente" },
+  { src: festaLocal, alt: "Salão de festas decorado" },
+  { src: galeria1, alt: "Detalhes da decoração" },
+  { src: galeria2, alt: "Mesa de doces" },
+  { src: galeria3, alt: "Ambiente da festa" },
+];
+
+const BUFFET_PHOTOS = [
+  {
+    src: "/buffet/WhatsApp%20Image%202026-09-22%20at%2019.01.40%20(1).jpeg",
+    alt: "Mesa de buffet pronta para servir",
+  },
+  {
+    src: "/buffet/WhatsApp%20Image%202026-09-22%20at%2019.01.40%20(2).jpeg",
+    alt: "Comidas e montagem do buffet",
+  },
+  {
+    src: "/buffet/WhatsApp%20Image%202026-09-22%20at%2019.01.40.jpeg",
+    alt: "Detalhes do buffet para convidados",
+  },
+  {
+    src: "/buffet/WhatsApp%20Image%202026-09-22%20at%2019.01.41%20(1).jpeg",
+    alt: "Mesa de buffet preparada para festa",
+  },
+  {
+    src: "/buffet/WhatsApp%20Image%202026-09-22%20at%2019.01.41.jpeg",
+    alt: "Buffet preparado para uma festa",
+  },
+];
 
 const PUBLIC_GALLERY_PHOTOS = [
   {
@@ -68,15 +103,47 @@ const PUBLIC_GALLERY_PHOTOS = [
   },
 ];
 
+const NEW_PHOTOS = [
+  { src: "/novas%20fotos/15%20anos%20debut.jpeg", alt: "Festa de 15 anos debut" },
+  {
+    src: "/novas%20fotos/WhatsApp%20Image%202026-10-05%20at%2015.03.18.jpeg",
+    alt: "Festa decorada com mesa e balões",
+  },
+  {
+    src: "/novas%20fotos/WhatsApp%20Image%202026-10-05%20at%2015.03.19.jpeg",
+    alt: "Noivos celebrando em uma festa",
+  },
+  {
+    src: "/novas%20fotos/WhatsApp%20Image%202026-10-05%20at%2015.07.41%20(1).jpeg",
+    alt: "Decoração de festa com balões",
+  },
+  {
+    src: "/novas%20fotos/WhatsApp%20Image%202026-10-05%20at%2015.07.41%20(2).jpeg",
+    alt: "Mesa decorada para comemoração",
+  },
+  {
+    src: "/novas%20fotos/WhatsApp%20Image%202026-10-05%20at%2015.07.41.jpeg",
+    alt: "Festa infantil com decoração colorida",
+  },
+  {
+    src: "/novas%20fotos/WhatsApp%20Image%202026-10-05%20at%2015.07.4441%20(1).jpeg",
+    alt: "Casal celebrando em preto e branco",
+  },
+  {
+    src: "/novas%20fotos/WhatsApp%20Image%202026-10-05%20at5%2015.03.18.jpeg",
+    alt: "Festa com decoração especial",
+  },
+  { src: "/novas%20fotos/paisagem.jpeg", alt: "Decoração de festa ao ar livre" },
+  { src: "/novas%20fotos/paisagem3.jpeg", alt: "Celebração ao ar livre" },
+  { src: "/novas%20fotos/paquita%20roxa.jpeg", alt: "Decoração de festa em tons roxos" },
+  { src: "/novas%20fotos/paquitas.jpeg", alt: "Decoração de festa Paquitas" },
+];
+
 const PHOTOS = [
-  { src: heroFesta, alt: "Festa completa decorada", span: "col-span-2 row-span-2" },
-  { src: decoracao, alt: "Arco de balões rosa e dourado", span: "col-span-2" },
-  { src: buffetImg, alt: "Mesa de buffet para festa", span: "" },
-  { src: galeria1, alt: "Detalhes da decoração", span: "" },
-  { src: galeria2, alt: "Mesa de doces", span: "" },
-  { src: galeria3, alt: "Ambiente da festa", span: "" },
-  { src: festaCliente, alt: "Festa montada no espaço do cliente", span: "col-span-2" },
-  ...PUBLIC_GALLERY_PHOTOS.map((photo) => ({ ...photo, span: "" })),
+  ...ASSET_PHOTOS,
+  ...BUFFET_PHOTOS,
+  ...PUBLIC_GALLERY_PHOTOS,
+  ...NEW_PHOTOS,
 ];
 
 export const Route = createFileRoute("/galeria")({
@@ -126,11 +193,11 @@ function GalleryPage() {
             </p>
           </div>
 
-          <div className="mt-12 grid auto-rows-[180px] grid-cols-2 gap-4 md:auto-rows-[220px] md:grid-cols-4">
+          <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4">
             {PHOTOS.map((photo) => (
               <figure
                 key={photo.alt}
-                className={`group relative overflow-hidden rounded-3xl bg-card shadow-md ${photo.span}`}
+                className="relative aspect-square overflow-hidden rounded-3xl bg-card shadow-md"
               >
                 <img
                   src={photo.src}
@@ -138,9 +205,8 @@ function GalleryPage() {
                   width={1024}
                   height={1024}
                   loading="lazy"
-                  className="size-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="size-full object-contain"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-foreground/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </figure>
             ))}
           </div>

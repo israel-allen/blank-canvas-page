@@ -529,20 +529,19 @@ function Index() {
             </h2>
           </div>
 
-          <div className="mt-12 grid auto-rows-[200px] grid-cols-2 gap-4 md:grid-cols-4">
+          <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4">
             {[
-              { src: heroFesta, alt: "Festa completa decorada", span: "col-span-2 row-span-2" },
-              { src: decoracao, alt: "Arco de balões rosa e dourado", span: "col-span-2" },
-              { src: buffetImg, alt: "Mesa de buffet para festa", span: "" },
-              { src: galeria1, alt: "Detalhes da decoração", span: "" },
-              { src: festaLocal, alt: "Salão de festas decorado", span: "col-span-2 row-span-1" },
-              { src: galeria2, alt: "Mesa de doces", span: "" },
-              { src: galeria3, alt: "Ambiente da festa", span: "" },
-              { src: festaCliente, alt: "Festa montada no espaço do cliente", span: "col-span-2" },
+              { src: heroFesta, alt: "Festa completa decorada" },
+              { src: decoracao, alt: "Arco de balões rosa e dourado" },
+              { src: buffetImg, alt: "Mesa de buffet para festa" },
+              { src: galeria1, alt: "Detalhes da decoração" },
+              { src: galeria2, alt: "Mesa de doces" },
+              { src: galeria3, alt: "Ambiente da festa" },
+              { src: festaCliente, alt: "Festa montada no espaço do cliente" },
             ].map((g, i) => (
               <figure
-                key={i}
-                className={`group relative overflow-hidden rounded-3xl shadow-md ${g.span}`}
+                key={g.alt}
+                className="relative aspect-square overflow-hidden rounded-3xl bg-background shadow-md"
               >
                 <img
                   src={g.src}
@@ -550,11 +549,18 @@ function Index() {
                   width={1024}
                   height={1024}
                   loading="lazy"
-                  className="size-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="size-full object-contain"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-foreground/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </figure>
             ))}
+          </div>
+          <div className="mt-8 flex justify-center">
+            <a
+              href="/galeria"
+              className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:scale-105"
+            >
+              Ver mais
+            </a>
           </div>
         </div>
       </section>
