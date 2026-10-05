@@ -13,11 +13,12 @@ import {
 import heroFesta from "../assets/hero-festa.jpg";
 import decoracao from "../assets/decoracao.jpg";
 import buffetImg from "../assets/buffet.jpg";
-import festaLocal from "../assets/festa-local.jpg";
 import festaCliente from "../assets/festa-cliente.jpg";
 import galeria1 from "../assets/galeria-1.jpg";
 import galeria2 from "../assets/galeria-2.jpg";
 import galeria3 from "../assets/galeria-3.jpg";
+
+const festaLocal = "/novas%20fotos/WhatsApp%20Image%202026-10-05%20at%2015.03.19.jpeg";
 
 // Substitua pelo número oficial de WhatsApp da Duda & Bia (formato 55DDDNÚMERO).
 const WHATSAPP = "5521988522664";
@@ -285,7 +286,7 @@ function Index() {
         <div className="grid items-center gap-12 md:grid-cols-2">
           <div className="relative">
             <img
-              src={decoracao}
+              src="/novas%20fotos/WhatsApp%20Image%202026-10-05%20at%2015.03.18.jpeg"
               alt="Decoração de festa com arco de balões rosa e dourado"
               width={1024}
               height={1024}
@@ -347,14 +348,14 @@ function Index() {
           <div className="mt-12 grid gap-8 md:grid-cols-2">
             {[
               {
-                img: festaCliente,
+                img: "/novas%20fotos/paquitas.jpeg",
                 title: "Levamos a festa até você",
                 text: "Buffet, decoração e toda a estrutura montada no espaço escolhido por você. Você indica o local, a gente transforma em festa.",
                 items: ["Buffet completo", "Decoração temática", "Estrutura e montagem"],
                 msg: "Olá! Quero uma festa no meu espaço. Podem me passar um orçamento?",
               },
               {
-                img: festaLocal,
+                img: "/novas%20fotos/paisagem.jpeg",
                 title: "Festa completa com local",
                 text: "Local, decoração, buffet e organização em uma solução completa. Praticidade total: você só precisa aproveitar.",
                 items: ["Local incluso", "Buffet e decoração", "Organização do evento"],
@@ -598,8 +599,8 @@ function Index() {
           </div>
           <div className="order-1 md:order-2">
             <img
-              src={festaLocal}
-              alt="Salão de festas completo decorado em tons de rosa e dourado"
+              src="/novas%20fotos/15%20anos%20debut.jpeg"
+              alt="Decoração de festa de 15 anos"
               width={1024}
               height={1024}
               loading="lazy"
