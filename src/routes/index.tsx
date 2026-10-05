@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import {
   Cake,
+  CalendarDays,
   ChevronLeft,
   ChevronRight,
   Heart,
@@ -13,7 +14,17 @@ import {
   Check,
   
 } from "lucide-react";
+import { ptBR } from "date-fns/locale";
 
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import heroFesta from "../assets/hero-festa.jpg";
 import decoracao from "../assets/decoracao.jpg";
 import buffetImg from "../assets/buffet.jpg";
@@ -279,6 +290,11 @@ function Testimonials() {
 function Index() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [budgetFormOpen, setBudgetFormOpen] = useState(false);
+  const [eventName, setEventName] = useState("");
+  const [eventDate, setEventDate] = useState<Date>();
+  const [datePickerOpen, setDatePickerOpen] = useState(false);
+  const [dateError, setDateError] = useState("");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -286,6 +302,22 @@ function Index() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const handleBudgetSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!eventDate) {
+      setDateError("Selecione a data do evento.");
+      return;
+    }
+
+    const formattedDate = `${String(eventDate.getDate()).padStart(2, "0")}/${String(
+      eventDate.getMonth() + 1,
+    ).padStart(2, "0")}/${eventDate.getFullYear()}`;
+    const message = `Olá, Duda & Bia! Gostaria de solicitar um orçamento.\nNome: ${eventName.trim()}\nData do evento: ${formattedDate}`;
+
+    window.open(waLink(message), "_blank", "noopener,noreferrer");
+    setBudgetFormOpen(false);
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -753,8 +785,8 @@ function Index() {
           </div>
           <div className="order-1 md:order-2">
             <img
-              src="/novas%20fotos/15%20anos%20debut.jpeg"
-              alt="Decoração de festa de 15 anos"
+              src="/novas%20fotos/WhatsApp%20Image%202026-10-05%20at5%2015.03.18.jpeg"
+              alt="Decoração de festa especial"
               width={1024}
               height={1024}
               loading="lazy"
@@ -854,15 +886,14 @@ function Index() {
             personalizada.
           </p>
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a
-              href={waLink("Olá, Duda & Bia! Quero solicitar um orçamento para minha festa.")}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={() => setBudgetFormOpen(true)}
               className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-semibold text-primary-foreground shadow-xl shadow-primary/30 transition-transform hover:scale-105 sm:text-base"
             >
               <WhatsAppIcon className="size-5" />
               Solicitar orçamento pelo WhatsApp
-            </a>
+            </button>
             <a
               href={INSTAGRAM}
               target="_blank"
@@ -941,6 +972,81 @@ function Index() {
           </p>
         </div>
       </footer>
+
+      <Dialog
+        open={budgetFormOpen}
+        onOpenChange={(nextOpen) => {
+          setBudgetFormOpen(nextOpen);
+          if (!nextOpen) setDateError("");
+        }}
+      >
+        <DialogContent className="max-h-[90vh] overflow-y-auto rounded-3xl sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Solicitar orçamento</DialogTitle>
+            <DialogDescription>
+              Informe seu nome e a data da festa para continuar pelo WhatsApp.
+            </DialogDescription>
+          </DialogHeader>
+          <form onSubmit={handleBudgetSubmit} className="space-y-5">
+            <div className="space-y-2">
+              <label htmlFor="budget-event-name" className="text-sm font-medium">
+                Seu nome
+              </label>
+              <input
+                id="budget-event-name"
+                name="name"
+                autoComplete="name"
+                required
+                value={eventName}
+                onChange={(event) => setEventName(event.currentTarget.value)}
+                className="h-11 w-full rounded-xl border border-input bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                placeholder="Digite seu nome"
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Data do evento</label>
+              <Popover open={datePickerOpen} onOpenChange={setDatePickerOpen}>
+                <PopoverTrigger asChild>
+                  <button
+                    type="button"
+                    aria-label="Escolher data do evento"
+                    aria-haspopup="dialog"
+                    className="inline-flex h-11 w-full items-center justify-start gap-2 rounded-xl border border-input bg-background px-3 text-left text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    <CalendarDays className="size-4 text-muted-foreground" />
+                    {eventDate
+                      ? `${String(eventDate.getDate()).padStart(2, "0")}/${String(
+                          eventDate.getMonth() + 1,
+                        ).padStart(2, "0")}/${eventDate.getFullYear()}`
+                      : "Selecione uma data"}
+                  </button>
+                </PopoverTrigger>
+                <PopoverContent align="start" className="w-auto p-0">
+                  <Calendar
+                    mode="single"
+                    selected={eventDate}
+                    onSelect={(date) => {
+                      setEventDate(date);
+                      setDateError("");
+                      setDatePickerOpen(false);
+                    }}
+                    locale={ptBR}
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
+              {dateError && <p className="text-sm text-destructive">{dateError}</p>}
+            </div>
+            <button
+              type="submit"
+              className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+              <WhatsAppIcon className="size-4" />
+              Continuar pelo WhatsApp
+            </button>
+          </form>
+        </DialogContent>
+      </Dialog>
 
       {/* WhatsApp flutuante */}
       <a
