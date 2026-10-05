@@ -39,6 +39,14 @@ const NAV = [
 
 const BUFFET_PHOTOS = [
   {
+    src: "/novas%20fotos/bufet1.jpeg",
+    alt: "Buffet preparado para convidados",
+  },
+  {
+    src: "/novas%20fotos/bufet2.jpeg",
+    alt: "Mesa de buffet para comemoração",
+  },
+  {
     src: "/buffet/WhatsApp%20Image%202026-09-22%20at%2019.01.41.jpeg",
     alt: "Buffet preparado para uma festa",
   },
